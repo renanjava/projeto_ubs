@@ -1,0 +1,5 @@
+~~ Atualizações ~~
+
+V1.0 - 29/08/2023
+	Commit inicial. Definido as classes de modelo e a especialização do médico 
+	pelo enum AreaMedico
