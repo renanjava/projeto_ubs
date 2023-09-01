@@ -2,7 +2,7 @@ package main;
 
 import javax.swing.JOptionPane;
 
-import classes.TelaCadastro;
+import ubs.swing.TelaCadastro;
 
 public class Main {
 

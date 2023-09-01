@@ -1,4 +1,4 @@
-package classes;
+package ubs.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class TelaCadastro extends JDialog {
 	private JPanel telaPrincipal = new JPanel(new GridBagLayout());
@@ -31,8 +32,9 @@ public class TelaCadastro extends JDialog {
 		setTitle("UBS - Unidade Básica de Saúde"); // titulo da tela
 		setSize(new Dimension(255, 250)); // dar tamanho
 		setLocationRelativeTo(null); // centralizar
-		setResizable(false); // bloqueia aumentar/diminuir o tamanho
-								// da tela usando o mouse
+		setResizable(false);
+		// bloqueia aumentar/diminuir o tamanho da tela usando o mouse
+		
 		// acima é as configurações básicas de uma tela
 
 		nomeUsuario.setPreferredSize(new Dimension(220, 25));
@@ -44,6 +46,7 @@ public class TelaCadastro extends JDialog {
 		dadosCampos.add(nomeUsuario);
 		dadosCampos.add(loginUsuario);
 		dadosCampos.add(senhaUsuario);
+		//customizar a janela JPanel
 		telaPrincipal.add(new JLabel("Cadastro de usuário"));
 		
 		GridBagConstraints coordenadas = new GridBagConstraints();
@@ -72,9 +75,21 @@ public class TelaCadastro extends JDialog {
 		botao.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	if(titulos[0].equals("Informe o nome")) {
+		    		for (TextField dados : dadosCampos) {
+		    			//validar campos
+		    			//adicionar fila
+						System.out.println(dados.getText());
+					}
+		    		
 		    		TelaCadastro.this.dispose();
 		    		TelaCadastro TelaPaginaDois = new TelaCadastro(2);
 		    	}else {
+		    		for (TextField dados : dadosCampos) {
+		    			//validar campos
+		    			//adicionar fila
+		    			//confirmação email
+						System.out.println(dados.getText());
+					}
 		    		System.exit(0);
 		    	}
 		    }
@@ -90,9 +105,5 @@ public class TelaCadastro extends JDialog {
 			return titulos1;
 		else
 			return titulos2;
-	}
-
-	private void adicionarComponentes() {
-
 	}
 }

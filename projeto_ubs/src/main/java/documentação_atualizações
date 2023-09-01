@@ -30,3 +30,9 @@ V1.3 - 01/09/2023
 	 
 V1.3.2 - 01/09/2023
 	Mini atualização: adicionado comportamento ao botao Salvar na tela de cadastro
+	
+V1.3.3 - 01/09/2023
+	Mini atualização: 
+	- resgatando os dados do TextField
+	- organizando a classe TelaCadastro
+	- comentando por "//" o que será implementado no código no futuro
