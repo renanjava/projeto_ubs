@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class TelaCadastro extends JDialog {
 		GridBagConstraints coordenadas = new GridBagConstraints();
 		coordenadas.gridx = 0;
 		coordenadas.gridy = 2;
-		String titulos[] = paginaTela(pagina);
+		final String titulos[] = paginaTela(pagina);
 		int i = 0;
 		
 		for (JLabel descricoes : descricoesCampos) {
@@ -66,7 +68,20 @@ public class TelaCadastro extends JDialog {
 		
 		add(telaPrincipal, BorderLayout.WEST);
 		setVisible(true);
+		
+		botao.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	if(titulos[0].equals("Informe o nome")) {
+		    		TelaCadastro.this.dispose();
+		    		TelaCadastro TelaPaginaDois = new TelaCadastro(2);
+		    	}else {
+		    		System.exit(0);
+		    	}
+		    }
+		});
 	}
+	
+	
 
 	private String[] paginaTela(int pagina) {
 		String[] titulos1 = { "Informe o nome", "Informe o login", "Informe a senha" };
