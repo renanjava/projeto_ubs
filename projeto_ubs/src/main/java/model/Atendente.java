@@ -1,5 +1,7 @@
 package model;
 
-public class Atendente {
+import classes.Pessoa;
+
+public class Atendente extends Pessoa{
 
 }

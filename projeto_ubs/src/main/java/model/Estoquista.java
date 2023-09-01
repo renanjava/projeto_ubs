@@ -1,5 +1,7 @@
 package model;
 
-public class Estoquista {
+import classes.Pessoa;
+
+public class Estoquista extends Pessoa{
 
 }

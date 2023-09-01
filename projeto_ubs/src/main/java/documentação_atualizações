@@ -3,3 +3,17 @@
 V1.0 - 29/08/2023
 	Commit inicial. Definido as classes de modelo e a especialização do médico 
 	pelo enum AreaMedico
+	
+V1.1 - 29/08/2023
+	Adicionado a classe abstrata Pessoa. sendo Pessoa pai, temos todas as 
+	outras classes como filhas, portanto, herança implementada
+	
+	Adicionado as áreas de especialização no enum AreaMedico
+	Adicionado os pacotes para criar interfaces, threads, arquivos,
+	 javamail, swing, datetime
+	
+	Adicionado os pacotes para iniciar a conexão com o banco Oracle, a classe
+	para fazer as operações CRUD, a DAO
+	
+	Adicionado o construtor para o paciente. Na hora do cadastro, é preciso
+	preencher os dados do construtor
