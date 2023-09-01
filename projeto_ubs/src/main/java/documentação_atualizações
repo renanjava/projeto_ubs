@@ -20,3 +20,10 @@ V1.1 - 29/08/2023
 	
 V1.2 - 31/08/2023	
 	Adicionado mais classes de modelo e de operações
+	
+V1.3 - 01/09/2023
+	Introduzindo a tela de cadastro com swing
+	
+	Por enquanto: 
+	 - Adicionado duas telas para inserir todos os dados do paciente
+	 - Falta implementar o comportamento do botão salvar
