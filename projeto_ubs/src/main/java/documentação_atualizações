@@ -36,3 +36,6 @@ V1.3.3 - 01/09/2023
 	- resgatando os dados do TextField
 	- organizando a classe TelaCadastro
 	- comentando por "//" o que será implementado no código no futuro
+	
+V1.4 - 01/09/2023
+	Criado a tela de login

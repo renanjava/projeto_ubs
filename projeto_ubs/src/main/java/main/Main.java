@@ -3,6 +3,7 @@ package main;
 import javax.swing.JOptionPane;
 
 import ubs.swing.TelaCadastro;
+import ubs.swing.TelaLogin;
 
 public class Main {
 
@@ -15,12 +16,12 @@ public class Main {
 				botoesCadastro, botoesCadastro[0]) == 0 ? true : false);
 		
 		if(cadastrar) {
-			TelaCadastro telaCadastro1 = new TelaCadastro(1);
-			//TelaCadastro telaCadastro2 = new TelaCadastro(2);
-		}else {
-			
-			
+			TelaCadastro telaCadastro = new TelaCadastro(1);
 		}
+		else {
+			TelaLogin telaLogin = new TelaLogin();
+		}
+			
 
 	}
 
