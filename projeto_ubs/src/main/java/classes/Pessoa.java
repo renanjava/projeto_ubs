@@ -5,8 +5,6 @@ public abstract class Pessoa {
 	protected String password;
 	protected String nome;
 	protected String email;
-	protected String cpf;
-	protected int idade;
 
 	public String getUsername() {
 		return username;
@@ -38,22 +36,6 @@ public abstract class Pessoa {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
 	}
 
 }

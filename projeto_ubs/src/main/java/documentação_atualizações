@@ -17,3 +17,6 @@ V1.1 - 29/08/2023
 	
 	Adicionado o construtor para o paciente. Na hora do cadastro, é preciso
 	preencher os dados do construtor
+	
+V1.2 - 31/08/2023	
+	Adicionado mais classes de modelo e de operações

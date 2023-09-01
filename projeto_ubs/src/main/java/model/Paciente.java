@@ -3,6 +3,8 @@ package model;
 import classes.Pessoa;
 
 public class Paciente extends Pessoa{
+	private String cpf;
+	private int idade;
 	
 	public Paciente(String username, String password, String nome, 
 			String cpf, int idade){
