@@ -39,3 +39,9 @@ V1.3.3 - 01/09/2023
 	
 V1.4 - 01/09/2023
 	Criado a tela de login
+	
+V1.5 - 01/09/2023
+	Implementado a validação de cadastro com o código enviado pelo email - JavaMail
+
+V1.5.2 - 02/09/2023
+	FIX no envio de email

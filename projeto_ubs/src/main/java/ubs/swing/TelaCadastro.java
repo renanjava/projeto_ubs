@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ubs.email.CodigoConfirmacao;
+
 public class TelaCadastro extends JDialog {
 	private JPanel telaCadastro = new JPanel(new GridBagLayout());
 	private List<JLabel> descricoesCampos = new ArrayList<JLabel>();
@@ -84,10 +86,18 @@ public class TelaCadastro extends JDialog {
 					TelaCadastro TelaPaginaDois = new TelaCadastro(2);
 				} else {
 					for (TextField dados : dadosCampos) {
+						System.out.println(dados.getName());
 						// validar campos
 						// adicionar fila
 						// confirmação email
-						System.out.println(dados.getText());
+						if(dados.getName().equals("textfield1")){
+							try {
+								CodigoConfirmacao codigoConfirmacao 
+								= new CodigoConfirmacao(dados.getText());
+							} catch (InterruptedException e1) {
+								e1.printStackTrace();
+							}
+						}
 					}
 					System.exit(0);
 				}

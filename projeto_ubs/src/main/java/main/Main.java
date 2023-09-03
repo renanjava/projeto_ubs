@@ -1,13 +1,17 @@
 package main;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
+import ubs.email.CodigoConfirmacao;
 import ubs.swing.TelaCadastro;
 import ubs.swing.TelaLogin;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException, MessagingException, InterruptedException {
 		String botoesCadastro[] = {"Sim","Não"};
 		boolean cadastrar = 
 				(JOptionPane.showOptionDialog(null, 
@@ -17,8 +21,7 @@ public class Main {
 		
 		if(cadastrar) {
 			TelaCadastro telaCadastro = new TelaCadastro(1);
-		}
-		else {
+		}else {
 			TelaLogin telaLogin = new TelaLogin();
 		}
 			

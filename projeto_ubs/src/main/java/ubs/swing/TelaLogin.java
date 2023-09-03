@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,13 @@ public class TelaLogin extends JDialog{
 		
 		add(telaLogin, BorderLayout.WEST);
 		setVisible(true);
+		
+		botaoSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					TelaLogin.this.dispose();
+					System.exit(0);
+				}
+		});
 	}
 	
 	public GridBagConstraints somarY(GridBagConstraints coordenadas) {
