@@ -35,6 +35,7 @@ public class TelaCadastro extends JDialog {
 	private TextField campoEmail = new TextField();
 	private TextField campoIdade = new TextField();
 	private JButton botaoCadastrar = new JButton("Cadastrar");
+	private boolean botaoAcionado = false;
 
 	public TelaCadastro(final Paciente paciente) {
 
@@ -107,7 +108,11 @@ public class TelaCadastro extends JDialog {
 				UserPosDAO userPosDAO = new UserPosDAO();
 				userPosDAO.salvar(paciente);
 				TelaCadastro.this.dispose();
+				botaoAcionado = true;
 			}
 		});
+	}
+	public boolean getBotaoAcionado() {
+		return botaoAcionado;
 	}
 }

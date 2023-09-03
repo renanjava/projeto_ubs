@@ -11,7 +11,7 @@ import ubs.threads.ThreadTempoLimite;
 
 public class BloqueioDeConta {
 	private int qtdErro = 0;
-	private	ThreadContaBloqueio tContaBloqueio;
+	private ThreadContaBloqueio tContaBloqueio;
 	private ThreadTempoLimite tTempoLimite;
 
 	public static void InfoBloqueio(int contador) {
@@ -36,26 +36,24 @@ public class BloqueioDeConta {
 	}
 
 	public void atingiuQtdErrosLimite() {
-		if (qtdErro == 3) {
-			tTempoLimite.interrupt();
-			tContaBloqueio.start();
-			InfoBloqueio(15);
-			qtdErro = 0;
-		}
+		tTempoLimite.interrupt();
+		tContaBloqueio.start();
+		InfoBloqueio(15);
+		qtdErro = 0;
 	}
 
 	public void somarErro() {
 		qtdErro += 1;
 	}
-	
+
 	public int getQtdErro() {
 		return qtdErro;
 	}
-	
+
 	public ThreadContaBloqueio getTContaBloqueio() {
 		return tContaBloqueio;
 	}
-	
+
 	public ThreadTempoLimite getTTempoLimite() {
 		return tTempoLimite;
 	}

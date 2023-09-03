@@ -72,3 +72,8 @@ V1.8 - 03/09/2023
 	Criado um contador de erros que o usuário pode cometer ao tentar logar-se
 	Criado um bloqueio de conta caso o usuário errar o login 3 vezes
 	Criado um tempo limite para ficar na tela de login, 30 segundos
+	
+V1.8.2 - 03/09/2023
+	FIX no bloqueio de conta
+	Redirecionamento para um lugar apenas quando o usuário passar nas validações de login
+	o redirecionamento não acontece quando ele termina o cadastro e nem com conta inválida

@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
+import com.sun.jna.platform.win32.User32Util;
+
 import classes.BloqueioDeConta;
 import conexao.postgres.SingleConnection;
 import dao.jdbc.UserPosDAO;
@@ -17,9 +19,13 @@ public class Main {
 
 	public static void main(String[] args)
 			throws UnsupportedEncodingException, MessagingException, InterruptedException {
+		
 		String botoesCadastro[] = { "Login", "Cadastro" };
-		boolean logar = (JOptionPane.showOptionDialog(null, "Seja bem-vindo(a)!", "Início", JOptionPane.DEFAULT_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null, botoesCadastro, botoesCadastro[0]) == 0 ? true : false);
+		boolean logar = 
+				(JOptionPane.showOptionDialog(null, "Seja bem-vindo(a)!", 
+						"Início", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, botoesCadastro, 
+						botoesCadastro[0]) == 0 ? true : false);
 
 		SingleConnection conexaoTeste = new SingleConnection();
 
@@ -50,7 +56,7 @@ public class Main {
 							JOptionPane.showMessageDialog(null, "Dados inválidos");
 							bloqueioConta.somarErro();
 
-							if (bloqueioConta.getQtdErro() == 5)
+							if (bloqueioConta.getQtdErro() == 3)
 								bloqueioConta.atingiuQtdErrosLimite();
 						} else {
 							JOptionPane.showMessageDialog(null, "Conta bloqueada, aguarde...");
@@ -63,7 +69,13 @@ public class Main {
 		} else {
 			Paciente paciente = new Paciente(); // teste jdbc
 			TelaCadastro telaCadastro = new TelaCadastro(paciente);
+			while (!telaCadastro.getBotaoAcionado()) {
+				Thread.sleep(350); // aguardando o botão salvar ser acionado
+			}
+			System.exit(0);
 		}
+		
+		System.out.println("NAO PODE APARECER APOS O CADASTRO, SÓ APÓS O LOGIN");
 
 	}
 
