@@ -62,3 +62,8 @@ V1.7 - 03/09/2023
 	Revisada no código
 	Remoção da coluna/atributo "username", agora será o cpf
 	Remoção da segunda página de cadastro, agora é tudo em uma só
+	
+V1.7.2 - 03/09/2023
+	FIX no login. Antes causava NullPointerException quando não encontrava
+	a conta no banco de dados, implementado um tratamento de exceção 
+	para indicar que não há essa conta no banco de dados

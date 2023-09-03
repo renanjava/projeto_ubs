@@ -63,23 +63,29 @@ public class UserPosDAO {
 	public boolean buscar(String cpf, String senha) throws Exception {
 		
 		String sql = "SELECT CPF, SENHA FROM PACIENTE WHERE CPF = '"+cpf+"'";
-
+		
+		
 		PreparedStatement statement = conexao.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
 
 		boolean encontrou;
 		Paciente usuarioEncontrado = new Paciente();
 
-		while (resultado.next()) {
-			usuarioEncontrado.setCpf(resultado.getString("CPF"));
-			usuarioEncontrado.setSenha(resultado.getString("SENHA"));
+		try {
+			while (resultado.next()) {
+				usuarioEncontrado.setCpf(resultado.getString("CPF"));
+				usuarioEncontrado.setSenha(resultado.getString("SENHA"));
+			}
+			
+			if(usuarioEncontrado.getCpf().equals(cpf) 
+			&& usuarioEncontrado.getSenha().equals(senha)) 
+				encontrou = true;
+			else
+				encontrou = false;
+		}catch(NullPointerException e) {
+			return false;
 		}
 		
-		if(usuarioEncontrado.getCpf().equals(cpf) 
-		&& usuarioEncontrado.getSenha().equals(senha)) 
-			encontrou = true;
-		else
-			encontrou = false;
 		/*
 		usuarioBuscado.setNome(resultado.getString("NOME"));
 		usuarioBuscado.setIdade(resultado.getInt("IDADE"));

@@ -95,12 +95,15 @@ public class TelaCadastro extends JDialog {
 				paciente.setSenha(campoSenha.getText());
 				paciente.setEmail(campoEmail.getText());
 				paciente.setIdade(Integer.parseInt(campoIdade.getText()));
-
+				
+				/*
 				try {
 					CodigoConfirmacao codigoConfirmacao = new CodigoConfirmacao(campoEmail.getText());
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
+				*/
+				
 				UserPosDAO userPosDAO = new UserPosDAO();
 				userPosDAO.salvar(paciente);
 				TelaCadastro.this.dispose();
