@@ -30,7 +30,6 @@ public class EnviaEmail {
 	
 	public void setChave(String chave){
 		this.chave = chave;
-		System.out.println("EnviaEmail: "+chave);
 	}
 
 	public void ProcessoEmail() throws MessagingException, UnsupportedEncodingException {

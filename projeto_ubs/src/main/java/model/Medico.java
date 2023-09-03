@@ -7,10 +7,10 @@ public class Medico extends Pessoa{
 	private AreaMedico especializacao;
 	private String crm;
 	
-	public Medico(String username, String password, String nome, 
+	public Medico(String username, String senha, String nome, 
 			String crm, AreaMedico especializacao){
 		this.username = username;
-		this.password = password;
+		this.senha = senha;
 		this.nome = nome;
 		this.crm = crm;
 		this.especializacao = especializacao;

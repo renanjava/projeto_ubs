@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dao.jdbc.UserPosDAO;
+import model.Paciente;
 import ubs.email.CodigoConfirmacao;
 
 public class TelaCadastro extends JDialog {
@@ -30,7 +32,8 @@ public class TelaCadastro extends JDialog {
 	private TextField senhaUsuario = new TextField();
 	private JButton botaoSalvar = new JButton("Salvar");
 
-	public TelaCadastro(int pagina) {
+	public TelaCadastro(final Paciente paciente, final int pagina) {
+		
 		setTitle("UBS - Unidade Básica de Saúde");
 		setSize(new Dimension(255, 250));
 		setLocationRelativeTo(null);
@@ -74,32 +77,33 @@ public class TelaCadastro extends JDialog {
 		setVisible(true);
 
 		botaoSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (titulos[0].equals("Informe o nome")) {
-					for (TextField dados : dadosCampos) {
-						// validar campos
-						// adicionar fila
-						System.out.println(dados.getText());
-					}
 
+            public void actionPerformed(ActionEvent e) {
+				
+				System.out.println(paciente);
+
+				if (pagina == 1){
+
+					paciente.setNome(nomeUsuario.getText());
+					paciente.setUsername(loginUsuario.getText());
+					paciente.setSenha(senhaUsuario.getText());
+					
 					TelaCadastro.this.dispose();
-					TelaCadastro TelaPaginaDois = new TelaCadastro(2);
+					TelaCadastro telaPaginaDois = new TelaCadastro(paciente,2);
 				} else {
-					for (TextField dados : dadosCampos) {
-						System.out.println(dados.getName());
-						// validar campos
-						// adicionar fila
-						// confirmação email
-						if(dados.getName().equals("textfield1")){
-							try {
-								CodigoConfirmacao codigoConfirmacao 
-								= new CodigoConfirmacao(dados.getText());
-							} catch (InterruptedException e1) {
-								e1.printStackTrace();
-							}
-						}
+					
+					paciente.setCpf(nomeUsuario.getText());
+					paciente.setEmail(loginUsuario.getText());
+					paciente.setIdade(4000);
+
+					try {
+						CodigoConfirmacao codigoConfirmacao = new CodigoConfirmacao(loginUsuario.getText());
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
 					}
-					System.exit(0);
+					UserPosDAO userPosDAO = new UserPosDAO();
+					userPosDAO.salvar(paciente);
+					TelaCadastro.this.dispose();
 				}
 			}
 		});

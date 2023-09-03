@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
+import conexao.postgres.SingleConnection;
+import model.Paciente;
 import ubs.email.CodigoConfirmacao;
 import ubs.swing.TelaCadastro;
 import ubs.swing.TelaLogin;
@@ -19,8 +21,12 @@ public class Main {
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
 				botoesCadastro, botoesCadastro[0]) == 0 ? true : false);
 		
+		SingleConnection conexaoTeste = new SingleConnection();
+		
 		if(cadastrar) {
-			TelaCadastro telaCadastro = new TelaCadastro(1);
+			Paciente paciente = new Paciente(); //teste jdbc
+			TelaCadastro telaCadastro = new TelaCadastro(paciente,1);
+			
 		}else {
 			TelaLogin telaLogin = new TelaLogin();
 		}
