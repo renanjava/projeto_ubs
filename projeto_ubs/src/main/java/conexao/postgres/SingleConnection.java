@@ -1,4 +1,4 @@
-package conexao.oracle;
+package conexao.postgres;
 
 public class SingleConnection {
 

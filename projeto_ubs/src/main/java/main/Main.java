@@ -12,10 +12,10 @@ import ubs.swing.TelaLogin;
 public class Main {
 
 	public static void main(String[] args) throws UnsupportedEncodingException, MessagingException, InterruptedException {
-		String botoesCadastro[] = {"Sim","Não"};
+		String botoesCadastro[] = {"Cadastro","Login"};
 		boolean cadastrar = 
 				(JOptionPane.showOptionDialog(null, 
-				"Deseja realizar o cadastro?", "Cadastrar Usuário", 
+				"Seja bem-vindo(a)!", "Início", 
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
 				botoesCadastro, botoesCadastro[0]) == 0 ? true : false);
 		
