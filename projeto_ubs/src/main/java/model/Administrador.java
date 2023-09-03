@@ -4,9 +4,9 @@ import classes.Pessoa;
 
 public class Administrador extends Pessoa{
 	
-	public Administrador(String username, String senha, 
+	public Administrador(String cpf, String senha, 
 			String nome){
-		this.username = username;
+		this.cpf = cpf;
 		this.senha = senha;
 		this.nome = nome;
 	}

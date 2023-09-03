@@ -19,15 +19,16 @@ public class UserPosDAO {
 
 	public void salvar(Paciente paciente) {
 		try {
-			String sql = "INSERT INTO PACIENTE(NOME, EMAIL, USERNAME, SENHA,"
-					+ "CPF, IDADE) VALUES(?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO PACIENTE(NOME, IDADE, EMAIL, CPF, SENHA)"
+					+" VALUES(?, ?, ?, ?, ?)";
+			
 			PreparedStatement insert = conexao.prepareStatement(sql);
 			insert.setString(1, paciente.getNome());
-			insert.setString(2, paciente.getEmail());
-			insert.setString(3, paciente.getUsername());
-			insert.setString(4, paciente.getSenha());
-			insert.setString(5, paciente.getCpf());
-			insert.setInt(6, paciente.getIdade());
+			insert.setInt(2, paciente.getIdade());
+			insert.setString(3, paciente.getEmail());
+			insert.setString(4, paciente.getCpf());
+			insert.setString(5, paciente.getSenha());
+			
 			insert.execute();
 			conexao.commit();
 
@@ -44,7 +45,7 @@ public class UserPosDAO {
 	public List<Paciente> listar() throws Exception {
 		List<Paciente> lista = new ArrayList<Paciente>();
 
-		String sql = "SELECT * FROM Paciente";
+		String sql = "SELECT * FROM PACIENTE";
 
 		PreparedStatement statement = conexao.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
@@ -59,22 +60,38 @@ public class UserPosDAO {
 		return lista;
 	}
 
-	/*public Paciente buscar(Long id) throws Exception {
-		//Paciente usuario = new Paciente();
-
-		String sql = "SELECT * FROM PACIENTE WHERE ID = "+id;
+	public boolean buscar(String cpf, String senha) throws Exception {
+		
+		String sql = "SELECT CPF, SENHA FROM PACIENTE WHERE CPF = '"+cpf+"'";
 
 		PreparedStatement statement = conexao.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
 
-		while (resultado.next()) {
-			//usuario.setNome(resultado.getString("NOME"));
-			//usuario.setEmail(resultado.getString("EMAIL"));
-		}
+		boolean encontrou;
+		Paciente usuarioEncontrado = new Paciente();
 
-		//return usuario;
+		while (resultado.next()) {
+			usuarioEncontrado.setCpf(resultado.getString("CPF"));
+			usuarioEncontrado.setSenha(resultado.getString("SENHA"));
+		}
+		
+		if(usuarioEncontrado.getCpf().equals(cpf) 
+		&& usuarioEncontrado.getSenha().equals(senha)) 
+			encontrou = true;
+		else
+			encontrou = false;
+		/*
+		usuarioBuscado.setNome(resultado.getString("NOME"));
+		usuarioBuscado.setIdade(resultado.getInt("IDADE"));
+		usuarioBuscado.setEmail(resultado.getString("EMAIL"));
+		usuarioBuscado.setCpf(resultado.getString("CPF"));
+		usuarioBuscado.setSenha(resultado.getString("SENHA"));
+		*/
+		
+		return encontrou;
 	}
-	*/
+	
+	/*
 	public void atualizar(Long id, String nomeAtualizado) {
 		String sql = "UPDATE Paciente "
 				+ "	  SET NOME = ?"
@@ -110,5 +127,6 @@ public class UserPosDAO {
 			e.printStackTrace();
 		}
 	}
+	 */
 }
 

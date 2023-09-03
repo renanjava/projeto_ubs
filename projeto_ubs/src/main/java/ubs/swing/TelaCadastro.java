@@ -25,38 +25,48 @@ public class TelaCadastro extends JDialog {
 	private List<JLabel> descricoesCampos = new ArrayList<JLabel>();
 	private List<TextField> dadosCampos = new ArrayList<TextField>();
 	private JLabel tituloNome = new JLabel();
-	private JLabel tituloLogin = new JLabel();
+	private JLabel tituloCpf = new JLabel();
 	private JLabel tituloSenha = new JLabel();
-	private TextField nomeUsuario = new TextField();
-	private TextField loginUsuario = new TextField();
-	private TextField senhaUsuario = new TextField();
-	private JButton botaoSalvar = new JButton("Salvar");
+	private JLabel tituloEmail = new JLabel();
+	private JLabel tituloIdade = new JLabel();
+	private TextField campoNome = new TextField();
+	private TextField campoCpf = new TextField();
+	private TextField campoSenha = new TextField();
+	private TextField campoEmail = new TextField();
+	private TextField campoIdade = new TextField();
+	private JButton botaoCadastrar = new JButton("Cadastrar");
 
-	public TelaCadastro(final Paciente paciente, final int pagina) {
-		
+	public TelaCadastro(final Paciente paciente) {
+
 		setTitle("UBS - Unidade Básica de Saúde");
-		setSize(new Dimension(255, 250));
+		setSize(new Dimension(255, 340));
 		setLocationRelativeTo(null);
 		setResizable(false);
 
-		// acima é as configurações básicas de uma tela
+		// acima é as configurações básicas de Nomea tela
 
-		nomeUsuario.setPreferredSize(new Dimension(220, 25));
-		loginUsuario.setPreferredSize(new Dimension(220, 25));
-		senhaUsuario.setPreferredSize(new Dimension(220, 25));
+		campoNome.setPreferredSize(new Dimension(220, 25));
+		campoCpf.setPreferredSize(new Dimension(220, 25));
+		campoSenha.setPreferredSize(new Dimension(220, 25));
+		campoEmail.setPreferredSize(new Dimension(220, 25));
+		campoIdade.setPreferredSize(new Dimension(220, 25));
 		descricoesCampos.add(tituloNome);
-		descricoesCampos.add(tituloLogin);
+		descricoesCampos.add(tituloCpf);
 		descricoesCampos.add(tituloSenha);
-		dadosCampos.add(nomeUsuario);
-		dadosCampos.add(loginUsuario);
-		dadosCampos.add(senhaUsuario);
-		// customizar a janela JPanel
+		descricoesCampos.add(tituloEmail);
+		descricoesCampos.add(tituloIdade);
+		dadosCampos.add(campoIdade);
+		dadosCampos.add(campoEmail);
+		dadosCampos.add(campoSenha);
+		dadosCampos.add(campoCpf);
+		dadosCampos.add(campoNome);
 		telaCadastro.add(new JLabel("Cadastro de usuário"));
 
 		GridBagConstraints coordenadas = new GridBagConstraints();
 		coordenadas.gridx = 0;
 		coordenadas.gridy = 2;
-		final String titulos[] = paginaTela(pagina);
+		String titulos[] = { "Informe o nome", "Informe o CPF", "Infome a senha", "Informe o Email",
+				"Informe a idade" };
 		int i = 0;
 
 		for (JLabel descricoes : descricoesCampos) {
@@ -66,7 +76,7 @@ public class TelaCadastro extends JDialog {
 			coordenadas.gridy += 4;
 			i++;
 		}
-		telaCadastro.add(botaoSalvar, coordenadas);
+		telaCadastro.add(botaoCadastrar, coordenadas);
 		coordenadas.gridy -= 2;
 		for (TextField campos : dadosCampos) {
 			telaCadastro.add(campos, coordenadas);
@@ -76,45 +86,25 @@ public class TelaCadastro extends JDialog {
 		add(telaCadastro, BorderLayout.WEST);
 		setVisible(true);
 
-		botaoSalvar.addActionListener(new ActionListener() {
+		botaoCadastrar.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
-				
-				System.out.println(paciente);
+			public void actionPerformed(ActionEvent e) {
 
-				if (pagina == 1){
+				paciente.setNome(campoNome.getText());
+				paciente.setCpf(campoCpf.getText());
+				paciente.setSenha(campoSenha.getText());
+				paciente.setEmail(campoEmail.getText());
+				paciente.setIdade(Integer.parseInt(campoIdade.getText()));
 
-					paciente.setNome(nomeUsuario.getText());
-					paciente.setUsername(loginUsuario.getText());
-					paciente.setSenha(senhaUsuario.getText());
-					
-					TelaCadastro.this.dispose();
-					TelaCadastro telaPaginaDois = new TelaCadastro(paciente,2);
-				} else {
-					
-					paciente.setCpf(nomeUsuario.getText());
-					paciente.setEmail(loginUsuario.getText());
-					paciente.setIdade(4000);
-
-					try {
-						CodigoConfirmacao codigoConfirmacao = new CodigoConfirmacao(loginUsuario.getText());
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-					UserPosDAO userPosDAO = new UserPosDAO();
-					userPosDAO.salvar(paciente);
-					TelaCadastro.this.dispose();
+				try {
+					CodigoConfirmacao codigoConfirmacao = new CodigoConfirmacao(campoEmail.getText());
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
 				}
+				UserPosDAO userPosDAO = new UserPosDAO();
+				userPosDAO.salvar(paciente);
+				TelaCadastro.this.dispose();
 			}
 		});
-	}
-
-	private String[] paginaTela(int pagina) {
-		String[] titulos1 = { "Informe o nome", "Informe o login", "Informe a senha" };
-		String[] titulos2 = { "Informe o CPF", "Informe o email", "Informe a idade" };
-		if (pagina == 1)
-			return titulos1;
-		else
-			return titulos2;
 	}
 }

@@ -1,16 +1,16 @@
 package classes;
 
 public abstract class Pessoa {
-	protected String username;
+	protected String cpf;
 	protected String senha;
 	protected String nome;
 
-	public String getUsername() {
-		return username;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getSenha() {

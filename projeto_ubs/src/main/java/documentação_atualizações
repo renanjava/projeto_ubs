@@ -54,3 +54,11 @@ V1.6 - 03/09/2023
 	JDBC e classe DAO implementadas, apenas a operação insert por enquanto.
 	O cadastro do paciente está gravando no banco de dados PostgreSQL
 	Adicionado uma lista de pendências no formato .txt dentro do projeto
+	
+V1.7 - 03/09/2023
+	Adicionado a validação de login, agora o usuário só pode 
+	logar se a conta dele estiver gravada no banco de dados
+	
+	Revisada no código
+	Remoção da coluna/atributo "username", agora será o cpf
+	Remoção da segunda página de cadastro, agora é tudo em uma só

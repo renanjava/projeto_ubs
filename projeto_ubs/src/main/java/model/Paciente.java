@@ -7,14 +7,6 @@ public class Paciente extends Pessoa {
 	private int idade;
 	private String email;
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
 	public int getIdade() {
 		return idade;
 	}
@@ -33,7 +25,7 @@ public class Paciente extends Pessoa {
 
 	@Override
 	public String toString() {
-		return "Paciente [cpf=" + cpf + ", idade=" + idade + ", email=" + email + ", username=" + username + ", senha="
+		return "Paciente [cpf=" + cpf + ", idade=" + idade + ", email=" + email + ", senha="
 				+ senha + ", nome=" + nome + "]";
 	}
 	
