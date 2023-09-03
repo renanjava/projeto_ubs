@@ -26,6 +26,7 @@ public class TelaLogin extends JDialog {
 	private TextField campoCpf = new TextField();
 	private TextField campoSenha = new TextField();
 	private JButton botaoCadastrar = new JButton("Logar");
+	private boolean botaoAcionado = false;
 	private GridBagConstraints coordenadas = new GridBagConstraints();
 
 	public TelaLogin() {
@@ -54,16 +55,8 @@ public class TelaLogin extends JDialog {
 
 		botaoCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserPosDAO userPosDAO = new UserPosDAO();
-				try {
-					if(userPosDAO.buscar(campoCpf.getText(),campoSenha.getText())) 
-						JOptionPane.showMessageDialog(null, "Logado!");
-					else
-						JOptionPane.showMessageDialog(null, "Conta inválida");
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
 				TelaLogin.this.dispose();
+				botaoAcionado = true;
 			}
 		});
 	}
@@ -71,5 +64,17 @@ public class TelaLogin extends JDialog {
 	public GridBagConstraints somarY(GridBagConstraints coordenadas) {
 		this.coordenadas.gridy = coordenadas.gridy + 2;
 		return this.coordenadas;
+	}
+	
+	public TextField getCampoCpf() {
+		return campoCpf;
+	}
+	
+	public TextField getCampoSenha() {
+		return campoSenha;
+	}
+	
+	public boolean getBotaoAcionado() {
+		return botaoAcionado;
 	}
 }

@@ -67,3 +67,8 @@ V1.7.2 - 03/09/2023
 	FIX no login. Antes causava NullPointerException quando não encontrava
 	a conta no banco de dados, implementado um tratamento de exceção 
 	para indicar que não há essa conta no banco de dados
+
+V1.8 - 03/09/2023
+	Criado um contador de erros que o usuário pode cometer ao tentar logar-se
+	Criado um bloqueio de conta caso o usuário errar o login 3 vezes
+	Criado um tempo limite para ficar na tela de login, 30 segundos
