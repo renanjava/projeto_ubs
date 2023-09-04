@@ -27,12 +27,17 @@ public class TelaInicial extends JDialog{
 		coordenadas.gridx = 0;
 		coordenadas.gridy = 0;
 		
-		telaInicial.add(new JLabel("Painel do Paciente"),coordenadas);
-		coordenadas.gridx = 0;
-		coordenadas.gridy += 6;
-		telaInicial.add(listarMedicamentos,coordenadas);
-		coordenadas.gridx += 3;
-		telaInicial.add(dadosUsuario,coordenadas);
+		telaInicial.add(new JLabel("SEUS DADOS"),coordenadas);
+		coordenadas.gridy++;
+		telaInicial.add(new JLabel("Nome: "+usuario.getNome()),coordenadas);
+		coordenadas.gridy++;
+		telaInicial.add(new JLabel("Idade: "+usuario.getIdade()),coordenadas);
+		coordenadas.gridy++;
+		telaInicial.add(new JLabel("Email: "+usuario.getEmail()),coordenadas);
+		coordenadas.gridy++;
+		telaInicial.add(new JLabel("CPF: "+usuario.getCpf()),coordenadas);
+		//telaInicial.add(listarMedicamentos,coordenadas);
+		//telaInicial.add(dadosUsuario,coordenadas);
 		
 		add(telaInicial, BorderLayout.WEST);
 		setVisible(true);

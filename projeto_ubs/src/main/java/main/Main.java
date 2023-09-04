@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
 import com.sun.jna.platform.win32.User32Util;
+import com.sun.jna.platform.win32.COM.TypeLibUtil.FindName;
 
 import classes.BloqueioDeConta;
 import conexao.postgres.SingleConnection;
@@ -21,6 +22,7 @@ public class Main {
 	public static void main(String[] args)
 			throws UnsupportedEncodingException, MessagingException, InterruptedException {
 		
+		Paciente usuarioLogado = null;
 		String botoesCadastro[] = { "Login", "Cadastro" };
 		boolean logar = 
 				(JOptionPane.showOptionDialog(null, "Seja bem-vindo(a)!", 
@@ -43,29 +45,26 @@ public class Main {
 				}
 
 				UserPosDAO userPosDAO = new UserPosDAO();
+
 				try {
-					if (userPosDAO.buscar(telaLogin.getCampoCpf().getText(), 
-							telaLogin.getCampoSenha().getText())
+					usuarioLogado = userPosDAO.buscar(telaLogin.getCampoCpf().getText());
+					
+					if (usuarioLogado.getCpf().equals(telaLogin.getCampoCpf().getText())
+							&& usuarioLogado.getSenha().equals(
+									telaLogin.getCampoSenha().getText())
 							&& !bloqueioConta.getTContaBloqueio().isControle()) {
 						
 						bloqueioConta.getTTempoLimite().interrupt();
 						JOptionPane.showMessageDialog(null, "Logado!");
 						break;
 
-					} else {
-						if (!bloqueioConta.getTContaBloqueio().isControle()) {
-							JOptionPane.showMessageDialog(null, "Dados inválidos");
-							bloqueioConta.somarErro();
-
-							if (bloqueioConta.getQtdErro() == 3)
-								bloqueioConta.atingiuQtdErrosLimite();
-						} else {
-							JOptionPane.showMessageDialog(null, "Conta bloqueada, aguarde...");
-						}
-					}
+					}else 
+						erroLogin(bloqueioConta,"Dados Inválidos");
+						
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					erroLogin(bloqueioConta,"Conta não cadastrada");
 				}
+				
 			} while (true);
 		} else {
 			Paciente paciente = new Paciente(); // teste jdbc
@@ -77,8 +76,20 @@ public class Main {
 		}
 		
 		//a partir daqui, o usuário logou em uma conta
-		TelaInicial telaInicial = new TelaInicial(null);
+		TelaInicial telaInicial = new TelaInicial(usuarioLogado);
 
+	}
+	
+	public static void erroLogin(BloqueioDeConta bloqueioConta, String msgErro) {
+		if (!bloqueioConta.getTContaBloqueio().isControle()) {
+			JOptionPane.showMessageDialog(null, msgErro);
+			bloqueioConta.somarErro();
+
+			if (bloqueioConta.getQtdErro() == 3)
+				bloqueioConta.atingiuQtdErrosLimite();
+		} else {
+			JOptionPane.showMessageDialog(null, "Acesso bloqueado, aguarde...");
+		}
 	}
 
 }

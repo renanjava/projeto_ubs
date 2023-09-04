@@ -86,3 +86,9 @@ V1.8.3 - 03/09/2023
 	Melhorado o Login:
 		- Campo de senha agora é protegido com *****
 		- Customizado a tela de login
+		
+V1.8.4 - 04/09/2023
+	Resgatando todos os dados da conta do usuário quando ele loga e apresentando
+	para ele os dados da sua conta
+	
+	próxima atualização -> botão pro usuário editar os dados da sua conta
