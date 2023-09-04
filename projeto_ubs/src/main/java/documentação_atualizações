@@ -77,3 +77,12 @@ V1.8.2 - 03/09/2023
 	FIX no bloqueio de conta
 	Redirecionamento para um lugar apenas quando o usuário passar nas validações de login
 	o redirecionamento não acontece quando ele termina o cadastro e nem com conta inválida
+	
+V1.8.3 - 03/09/2023
+	FIX no bloqueio de conta -> agora quando o limite de tempo de login for alcançado
+	o programa informa o usuário que o tempo for extendido e o programa se encerra
+	Adicionado a Tela Inicial
+	
+	Melhorado o Login:
+		- Campo de senha agora é protegido com *****
+		- Customizado a tela de login

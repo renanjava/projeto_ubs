@@ -13,6 +13,7 @@ import dao.jdbc.UserPosDAO;
 import model.Paciente;
 import ubs.email.CodigoConfirmacao;
 import ubs.swing.TelaCadastro;
+import ubs.swing.TelaInicial;
 import ubs.swing.TelaLogin;
 
 public class Main {
@@ -75,7 +76,8 @@ public class Main {
 			System.exit(0);
 		}
 		
-		System.out.println("NAO PODE APARECER APOS O CADASTRO, SÓ APÓS O LOGIN");
+		//a partir daqui, o usuário logou em uma conta
+		TelaInicial telaInicial = new TelaInicial(null);
 
 	}
 

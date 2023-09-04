@@ -44,7 +44,7 @@ public class TelaCadastro extends JDialog {
 		setLocationRelativeTo(null);
 		setResizable(false);
 
-		// acima é as configurações básicas de Nomea tela
+		// acima é as configurações básicas de uma tela
 
 		campoNome.setPreferredSize(new Dimension(220, 25));
 		campoCpf.setPreferredSize(new Dimension(220, 25));

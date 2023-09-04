@@ -15,40 +15,48 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 import dao.jdbc.UserPosDAO;
 import model.Paciente;
 
 public class TelaLogin extends JDialog {
 	private JPanel telaLogin = new JPanel(new GridBagLayout());
-	private JLabel tituloLogin = new JLabel("Informe o CPF");
-	private JLabel tituloSenha = new JLabel("Informe a senha");
+	private JLabel tituloLogin = new JLabel("CPF");
+	private JLabel tituloSenha = new JLabel("Senha");
 	private TextField campoCpf = new TextField();
-	private TextField campoSenha = new TextField();
+	private JPasswordField campoSenha = new JPasswordField();
 	private JButton botaoCadastrar = new JButton("Logar");
 	private boolean botaoAcionado = false;
 	private GridBagConstraints coordenadas = new GridBagConstraints();
 
 	public TelaLogin() {
 		setTitle("UBS - Unidade Básica de Saúde");
-		setSize(new Dimension(255, 190));
+		setSize(190, 140);
 		setLocationRelativeTo(null);
 		setResizable(false);
 
-		telaLogin.add(new JLabel("Acesso de usuário"));
-		tituloLogin.setPreferredSize(new Dimension(230, 25));
-		tituloSenha.setPreferredSize(new Dimension(230, 25));
-		campoCpf.setPreferredSize(new Dimension(220, 25));
-		campoSenha.setPreferredSize(new Dimension(220, 25));
+		
+		coordenadas.gridx = 1;
+		telaLogin.add(new JLabel("Acesso de usuário"),coordenadas);
+		tituloLogin.setBounds(20, 50, 120, 20);
+		tituloSenha.setBounds(20, 100, 120, 20);
+		campoCpf.setPreferredSize(new Dimension(120, 22));
+		campoSenha.setPreferredSize(new Dimension(120, 22));
 
 		coordenadas.gridx = 0;
 		coordenadas.gridy = 2;
-
-		telaLogin.add(tituloLogin, somarY(coordenadas));
-		telaLogin.add(campoCpf, somarY(coordenadas));
-		telaLogin.add(tituloSenha, somarY(coordenadas));
-		telaLogin.add(campoSenha, somarY(coordenadas));
-		telaLogin.add(botaoCadastrar, somarY(coordenadas));
+		telaLogin.add(tituloLogin,coordenadas);
+		coordenadas.gridx++;
+		telaLogin.add(campoCpf,coordenadas);
+		coordenadas.gridx = 0;
+		coordenadas.gridy += 4;
+		telaLogin.add(tituloSenha,coordenadas);
+		coordenadas.gridx++;
+		telaLogin.add(campoSenha,coordenadas);
+		coordenadas.gridx = 1;
+		coordenadas.gridy += 4;
+		telaLogin.add(botaoCadastrar,coordenadas);
 
 		add(telaLogin, BorderLayout.WEST);
 		setVisible(true);
@@ -61,8 +69,8 @@ public class TelaLogin extends JDialog {
 		});
 	}
 
-	public GridBagConstraints somarY(GridBagConstraints coordenadas) {
-		this.coordenadas.gridy = coordenadas.gridy + 2;
+	public GridBagConstraints somarCoordenadas(GridBagConstraints coordenadas) {
+		this.coordenadas.gridx = coordenadas.gridx += 1;
 		return this.coordenadas;
 	}
 	
@@ -70,7 +78,7 @@ public class TelaLogin extends JDialog {
 		return campoCpf;
 	}
 	
-	public TextField getCampoSenha() {
+	public JPasswordField getCampoSenha() {
 		return campoSenha;
 	}
 	

@@ -16,6 +16,7 @@ public class ThreadTempoLimite extends Thread{
 			Date atual = new Date();
 			if(atual.after(limite)) {
 				JOptionPane.showMessageDialog(null, "Tempo limite de acesso alcançado. Tente novamente!");
+				System.exit(0);
 				break;
 			}
 			continue;
