@@ -9,7 +9,8 @@ import java.util.List;
 
 import conexao.postgres.SingleConnection;
 import model.Paciente;
-import ubs.enums.ConsultaBanco;
+import ubs.enums.BuscarBanco;
+import ubs.exceptions.UsuarioNullException;
 
 public class UserPosDAO {
 	private Connection conexao;
@@ -20,16 +21,15 @@ public class UserPosDAO {
 
 	public void salvar(Paciente paciente) {
 		try {
-			String sql = "INSERT INTO PACIENTE(NOME, IDADE, EMAIL, CPF, SENHA)"
-					+" VALUES(?, ?, ?, ?, ?)";
-			
+			String sql = "INSERT INTO PACIENTE(NOME, IDADE, EMAIL, CPF, SENHA)" + " VALUES(?, ?, ?, ?, ?)";
+
 			PreparedStatement insert = conexao.prepareStatement(sql);
 			insert.setString(1, paciente.getNome());
 			insert.setInt(2, paciente.getIdade());
 			insert.setString(3, paciente.getEmail());
 			insert.setString(4, paciente.getCpf());
 			insert.setString(5, paciente.getSenha());
-			
+
 			insert.execute();
 			conexao.commit();
 
@@ -52,76 +52,47 @@ public class UserPosDAO {
 		ResultSet resultado = statement.executeQuery();
 
 		while (resultado.next()) {
-			//Paciente user = new Paciente();
-			//user.setNome(resultado.getString("NOME"));
-			//user.setEmail(resultado.getString("EMAIL"));
-			//lista.add(user);
+			// Paciente user = new Paciente();
+			// user.setNome(resultado.getString("NOME"));
+			// user.setEmail(resultado.getString("EMAIL"));
+			// lista.add(user);
 		}
 
 		return lista;
 	}
 
-	public Paciente buscar(String cpf, ConsultaBanco tabela) throws Exception {
-		
-		String sql = "SELECT * FROM "+tabela+" "
-				   + "WHERE "+tabela.getChavePrimaria()+" = '"+cpf+"'";
-		
-		
+	public Paciente buscar(String cpf, BuscarBanco tabela) throws Exception {
+
+		String sql = "SELECT * FROM " + tabela + " " + "WHERE " + tabela.getChavePrimaria() + " = '" + cpf + "'";
+
 		PreparedStatement statement = conexao.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
 
 		Paciente usuarioEncontrado = new Paciente();
 
-		try {
-			while (resultado.next()) {
-				usuarioEncontrado.setNome(resultado.getString("NOME"));
-				usuarioEncontrado.setIdade(resultado.getInt("IDADE"));
-				usuarioEncontrado.setEmail(resultado.getString("EMAIL"));
-				usuarioEncontrado.setCpf(resultado.getString("CPF"));
-				usuarioEncontrado.setSenha(resultado.getString("SENHA"));
-			}
-		}catch(NullPointerException e) {
-			return null;
-		}		
+		if (!resultado.next())
+			throw new UsuarioNullException();
+		
+		usuarioEncontrado.setNome(resultado.getString("NOME"));
+		usuarioEncontrado.setIdade(resultado.getInt("IDADE"));
+		usuarioEncontrado.setEmail(resultado.getString("EMAIL"));
+		usuarioEncontrado.setCpf(resultado.getString("CPF"));
+		usuarioEncontrado.setSenha(resultado.getString("SENHA"));
 		return usuarioEncontrado;
 	}
-	
+
 	/*
-	public void atualizar(Long id, String nomeAtualizado) {
-		String sql = "UPDATE Paciente "
-				+ "	  SET NOME = ?"
-				+ "	  WHERE ID = "+id;
-		try {
-			PreparedStatement update = conexao.prepareStatement(sql);
-			update.setString(1, nomeAtualizado);
-			update.execute();
-			conexao.commit();
-		} catch (SQLException e) {
-			try {
-				conexao.rollback();
-			}catch(Exception e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		}
-	}
-	
-	public void deletar(Long id) {
-		String sql = "DELETE FROM PACIENTE"
-				+ "	  WHERE ID = "+id;
-		try {
-			PreparedStatement delete = conexao.prepareStatement(sql);
-			delete.execute();
-			conexao.commit();
-		}catch(Exception e){
-			try {
-				conexao.rollback();
-			}catch(Exception e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		}
-	}
+	 * public void atualizar(Long id, String nomeAtualizado) { String sql =
+	 * "UPDATE Paciente " + "	  SET NOME = ?" + "	  WHERE ID = "+id; try {
+	 * PreparedStatement update = conexao.prepareStatement(sql); update.setString(1,
+	 * nomeAtualizado); update.execute(); conexao.commit(); } catch (SQLException e)
+	 * { try { conexao.rollback(); }catch(Exception e1) { e1.printStackTrace(); }
+	 * e.printStackTrace(); } }
+	 * 
+	 * public void deletar(Long id) { String sql = "DELETE FROM PACIENTE" +
+	 * "	  WHERE ID = "+id; try { PreparedStatement delete =
+	 * conexao.prepareStatement(sql); delete.execute(); conexao.commit();
+	 * }catch(Exception e){ try { conexao.rollback(); }catch(Exception e1) {
+	 * e1.printStackTrace(); } e.printStackTrace(); } }
 	 */
 }
-

@@ -1,6 +1,6 @@
 package ubs.enums;
 
-public enum ConsultaBanco {
+public enum BuscarBanco {
 	PACIENTE("CPF"),
 	MEDICO("CRM"),
 	ADMINISTRADOR("IDADMIN"),
@@ -8,7 +8,7 @@ public enum ConsultaBanco {
 	
 	private final String chavePrimaria;
 	
-	ConsultaBanco(String chavePrimaria){
+	BuscarBanco(String chavePrimaria){
 		this.chavePrimaria = chavePrimaria;
 	}
 	

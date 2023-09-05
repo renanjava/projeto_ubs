@@ -98,3 +98,14 @@ V1.8.5 - 05/09/2023
 	Exception customizada (falta introduzir ela no insert DAO)
 	Enum que tem a TABELA e a PK de forma agrupada pras consultas ficarem dinâmicas
 	
+V1.8.6 - 05/09/2023
+	Melhoria no código:
+		- Implementado a Exception Customizada: 
+		   agora quando não encontra nenhum usuário no Banco de dados, 
+		   o programa retorna uma Exception e não null igual a antes
+		  
+		- Iniciado os Testes Unitários:
+			feito dois testes unitários na classe de buscar do DAO.
+			ambos os testes passaram: Antes da adição da 
+			Exception Customizada e depois
+	

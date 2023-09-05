@@ -13,7 +13,8 @@ import conexao.postgres.SingleConnection;
 import dao.jdbc.UserPosDAO;
 import model.Paciente;
 import ubs.email.CodigoConfirmacao;
-import ubs.enums.ConsultaBanco;
+import ubs.enums.BuscarBanco;
+import ubs.exceptions.UsuarioNullException;
 import ubs.swing.TelaCadastro;
 import ubs.swing.TelaInicial;
 import ubs.swing.TelaLogin;
@@ -21,7 +22,7 @@ import ubs.swing.TelaLogin;
 public class Main {
 
 	public static void main(String[] args)
-			throws UnsupportedEncodingException, MessagingException, InterruptedException {
+			throws Exception, UsuarioNullException {
 		
 		Paciente usuarioLogado = null;
 		String botoesCadastro[] = { "Login", "Cadastro" };
@@ -49,7 +50,7 @@ public class Main {
 
 				try {
 					usuarioLogado = userPosDAO.buscar(telaLogin.getCampoCpf().getText(),
-							ConsultaBanco.PACIENTE);
+							BuscarBanco.PACIENTE);
 					
 					if (usuarioLogado.getCpf().equals(telaLogin.getCampoCpf().getText())
 							&& usuarioLogado.getSenha().equals(
@@ -63,8 +64,10 @@ public class Main {
 					}else 
 						erroLogin(bloqueioConta,"Dados Inválidos");
 						
-				} catch (Exception e1) {
+				} catch (UsuarioNullException e) {
 					erroLogin(bloqueioConta,"Conta não cadastrada");
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				
 			} while (true);

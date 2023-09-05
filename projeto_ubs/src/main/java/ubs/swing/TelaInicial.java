@@ -73,8 +73,8 @@ public class TelaInicial extends JDialog{
 			coordenadas.gridx = 0;
 			coordenadas.gridy = 0;
 			
-			telaInicial.add(emailAtualTitulo,coordenadas);
-			telaInicial.add(emailAtualCampo,coordenadas);
+			telaInicial.add(emailAtualTitulo,somarY());
+			telaInicial.add(emailAtualCampo,somarY());
 			
 			add(telaInicial, BorderLayout.WEST);
 			setVisible(true);
