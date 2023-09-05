@@ -49,12 +49,18 @@ public class EnviaEmail {
 			}
 		});
 
+		
+		StringBuilder stringBuilderTextoEmail = new StringBuilder();
+		 stringBuilderTextoEmail.append("<h1>Olá Paciente</h1> <br/><br/>");
+		  stringBuilderTextoEmail.append("Você está recenbendo um email com o <b>Código de Confirmação</b><br/>");
+		  stringBuilderTextoEmail.append("<br/><br/><br/><br/>");
+		  
 		Address[] toUser = InternetAddress.parse(destino);
 		Message mensagem = new MimeMessage(sess);
 		mensagem.setFrom(new InternetAddress(userName, "UBS - Unidade Básica de Saúde"));
 		mensagem.setRecipients(Message.RecipientType.TO, toUser);
 		mensagem.setSubject("Código de confirmação");
-		mensagem.setText(textoEmail+chave);
+		mensagem.setText(stringBuilderTextoEmail+textoEmail+chave);
 
 		javax.mail.Transport.send(mensagem);
 	}
