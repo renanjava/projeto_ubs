@@ -13,7 +13,6 @@ import conexao.postgres.SingleConnection;
 import dao.jdbc.UserPosDAO;
 import model.Paciente;
 import ubs.email.CodigoConfirmacao;
-import ubs.enums.ConsultaBanco;
 import ubs.swing.TelaCadastro;
 import ubs.swing.TelaInicial;
 import ubs.swing.TelaLogin;
@@ -48,8 +47,7 @@ public class Main {
 				UserPosDAO userPosDAO = new UserPosDAO();
 
 				try {
-					usuarioLogado = userPosDAO.buscar(telaLogin.getCampoCpf().getText(),
-							ConsultaBanco.PACIENTE);
+					usuarioLogado = userPosDAO.buscar(telaLogin.getCampoCpf().getText());
 					
 					if (usuarioLogado.getCpf().equals(telaLogin.getCampoCpf().getText())
 							&& usuarioLogado.getSenha().equals(

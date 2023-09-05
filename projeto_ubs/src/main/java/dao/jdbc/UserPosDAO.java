@@ -9,7 +9,6 @@ import java.util.List;
 
 import conexao.postgres.SingleConnection;
 import model.Paciente;
-import ubs.enums.ConsultaBanco;
 
 public class UserPosDAO {
 	private Connection conexao;
@@ -61,10 +60,9 @@ public class UserPosDAO {
 		return lista;
 	}
 
-	public Paciente buscar(String cpf, ConsultaBanco tabela) throws Exception {
+	public Paciente buscar(String cpf) throws Exception {
 		
-		String sql = "SELECT * FROM "+tabela+" "
-				   + "WHERE "+tabela.getChavePrimaria()+" = '"+cpf+"'";
+		String sql = "SELECT * FROM PACIENTE WHERE CPF = '"+cpf+"'";
 		
 		
 		PreparedStatement statement = conexao.prepareStatement(sql);
@@ -82,7 +80,16 @@ public class UserPosDAO {
 			}
 		}catch(NullPointerException e) {
 			return null;
-		}		
+		}
+		
+		/*
+		usuarioBuscado.setNome(resultado.getString("NOME"));
+		usuarioBuscado.setIdade(resultado.getInt("IDADE"));
+		usuarioBuscado.setEmail(resultado.getString("EMAIL"));
+		usuarioBuscado.setCpf(resultado.getString("CPF"));
+		usuarioBuscado.setSenha(resultado.getString("SENHA"));
+		*/
+		
 		return usuarioEncontrado;
 	}
 	

@@ -92,9 +92,3 @@ V1.8.4 - 04/09/2023
 	para ele os dados da sua conta
 	
 	próxima atualização -> botão pro usuário editar os dados da sua conta
-	
-V1.8.5 - 05/09/2023
-	Começando a tela de editar dados do usuário
-	Exception customizada (falta introduzir ela no insert DAO)
-	Enum que tem a TABELA e a PK de forma agrupada pras consultas ficarem dinâmicas
-	
