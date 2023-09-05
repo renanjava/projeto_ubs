@@ -13,9 +13,10 @@ import conexao.postgres.SingleConnection;
 import dao.jdbc.UserPosDAO;
 import model.Paciente;
 import ubs.enums.BuscarBanco;
-import ubs.exceptions.UsuarioNullException;
+import ubs.exceptions.UsuarioSemDadosException;
+import ubs.exceptions.UsuarioNaoEncontradoException;
 
-public class TesteDAO {
+public class TesteBuscarDAO {
 	
 	@Test
 	public void buscarDeveRetornarPacienteValido() throws Exception {
@@ -25,12 +26,21 @@ public class TesteDAO {
 	}
 	
 	@Test
-	public void buscarDeveRetornarUsuarioNullException() throws UsuarioNullException{
+	public void buscarDeveRetornarUsuarioNullException() throws UsuarioNaoEncontradoException{
 		UserPosDAO userPosDAO = new UserPosDAO();
 		
-		Exception resultado = assertThrows(UsuarioNullException.class, 
+		Exception resultado = assertThrows(UsuarioNaoEncontradoException.class, 
 				() -> userPosDAO.buscar("96868685", BuscarBanco.PACIENTE));
 		
-		assertEquals("Usuário não encontrado", resultado.getMessage());
+		assertEquals("O usuário não foi encontrado", resultado.getMessage());
+	}
+	
+	@Test
+	public void buscarDeveRetornarStringNullException() throws UsuarioSemDadosException {
+		UserPosDAO userPosDAO = new UserPosDAO();
+				
+		Exception resultado = assertThrows(UsuarioSemDadosException.class, 
+				()-> userPosDAO.buscar(null, BuscarBanco.PACIENTE));
+		assertEquals("O usuário informado não tem dados",resultado.getMessage());
 	}
 }

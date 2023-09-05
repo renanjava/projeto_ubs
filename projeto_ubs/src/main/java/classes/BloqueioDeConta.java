@@ -14,19 +14,12 @@ public class BloqueioDeConta {
 	private ThreadContaBloqueio tContaBloqueio;
 	private ThreadTempoLimite tTempoLimite;
 
-	public static void InfoBloqueio(int contador) {
-		Date dataHorario = new Date();
-		SimpleDateFormat horarioFormatado = new SimpleDateFormat("HH:mm:ss");
-		String exibirData1 = "Conta bloqueada em: " + horarioFormatado.format(dataHorario);
-		dataHorario.setSeconds(dataHorario.getSeconds() + contador);
-		String exibirData2 = "Conta desbloqueará em: " + horarioFormatado.format(dataHorario);
-		JOptionPane.showMessageDialog(null, exibirData1 + "\n" + exibirData2);
-		dataHorario.setSeconds(dataHorario.getSeconds() - contador);
-	}
-
 	public void instrucoesBloqueio() {
-		JOptionPane.showMessageDialog(null, "Instruções\n\n" + "- 30 segundos para logar-se\n"
-				+ "- 10 segundos de bloqueio de conta\n" + "- 3 Tentativas de login\n\n");
+		JOptionPane.showMessageDialog(null, 
+				"Instruções\n\n" 
+				+ "- 30 segundos para logar-se\n"
+				+"- 10 segundos de bloqueio de conta\n" 
+				+ "- 3 Tentativas de login\n\n");
 	}
 
 	public void iniciarContagem() {
@@ -38,8 +31,18 @@ public class BloqueioDeConta {
 	public void atingiuQtdErrosLimite() {
 		tTempoLimite.interrupt();
 		tContaBloqueio.start();
-		InfoBloqueio(15);
+		InfoBloqueio();
 		qtdErro = 0;
+	}
+	
+	public static void InfoBloqueio() {
+		Date dataHorario = new Date();
+		SimpleDateFormat horarioFormatado = new SimpleDateFormat("HH:mm:ss");
+		String exibirData1 = "Conta bloqueada em: " + horarioFormatado.format(dataHorario);
+		dataHorario.setSeconds(dataHorario.getSeconds() + 15);
+		String exibirData2 = "Conta desbloqueará em: " + horarioFormatado.format(dataHorario);
+		JOptionPane.showMessageDialog(null, exibirData1 + "\n" + exibirData2);
+		dataHorario.setSeconds(dataHorario.getSeconds() - 15);
 	}
 
 	public void somarErro() {

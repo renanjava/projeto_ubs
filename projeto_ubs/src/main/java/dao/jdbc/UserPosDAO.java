@@ -10,7 +10,9 @@ import java.util.List;
 import conexao.postgres.SingleConnection;
 import model.Paciente;
 import ubs.enums.BuscarBanco;
-import ubs.exceptions.UsuarioNullException;
+import ubs.exceptions.UsuarioSemDadosException;
+import ubs.exceptions.UsuarioNaoEncontradoException;
+import ubs.exceptions.UsuarioPkDuplicadaException;
 
 public class UserPosDAO {
 	private Connection conexao;
@@ -19,9 +21,18 @@ public class UserPosDAO {
 		conexao = SingleConnection.getConnection();
 	}
 
-	public void salvar(Paciente paciente) {
+	public void salvar(Paciente paciente) throws Exception
+	{
+		
+		if(paciente == null)
+			throw new UsuarioSemDadosException();
+		
+		if(paciente.getCpf().equals(buscar(paciente.getCpf(),BuscarBanco.PACIENTE).getCpf()))
+			throw new UsuarioPkDuplicadaException();
+		
 		try {
-			String sql = "INSERT INTO PACIENTE(NOME, IDADE, EMAIL, CPF, SENHA)" + " VALUES(?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO PACIENTE(NOME, IDADE, EMAIL, CPF, SENHA)" 
+						+" VALUES(?, ?, ?, ?, ?)";
 
 			PreparedStatement insert = conexao.prepareStatement(sql);
 			insert.setString(1, paciente.getNome());
@@ -62,8 +73,12 @@ public class UserPosDAO {
 	}
 
 	public Paciente buscar(String cpf, BuscarBanco tabela) throws Exception {
+		
+		if(cpf == null)
+			throw new UsuarioSemDadosException();
 
-		String sql = "SELECT * FROM " + tabela + " " + "WHERE " + tabela.getChavePrimaria() + " = '" + cpf + "'";
+		String sql = "SELECT * FROM " + tabela + " " + 
+					 "WHERE " + tabela.getChavePrimaria() + " = '" + cpf + "'";
 
 		PreparedStatement statement = conexao.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
@@ -71,7 +86,7 @@ public class UserPosDAO {
 		Paciente usuarioEncontrado = new Paciente();
 
 		if (!resultado.next())
-			throw new UsuarioNullException();
+			throw new UsuarioNaoEncontradoException();
 		
 		usuarioEncontrado.setNome(resultado.getString("NOME"));
 		usuarioEncontrado.setIdade(resultado.getInt("IDADE"));
