@@ -21,13 +21,15 @@ public class UserPosDAO {
 		conexao = SingleConnection.getConnection();
 	}
 
-	public void salvar(Paciente paciente) throws Exception
-	{
+	public void salvar(Paciente paciente) throws Exception{
 		
 		if(paciente == null)
 			throw new UsuarioSemDadosException();
 		
-		if(paciente.getCpf().equals(buscar(paciente.getCpf(),BuscarBanco.PACIENTE).getCpf()))
+		
+		if(paciente.getCpf().equals(
+				buscar(paciente.getCpf(),
+						BuscarBanco.PACIENTE).getCpf()))
 			throw new UsuarioPkDuplicadaException();
 		
 		try {
@@ -43,6 +45,7 @@ public class UserPosDAO {
 
 			insert.execute();
 			conexao.commit();
+			System.out.println("Cadastrado no banco de dados");
 
 		} catch (Exception e) {
 			try {

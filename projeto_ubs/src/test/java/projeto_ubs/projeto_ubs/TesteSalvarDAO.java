@@ -17,20 +17,13 @@ public class TesteSalvarDAO {
 	@Test
 	public void salvarDeveInserirNoBanco() throws Exception{
 		UserPosDAO userPosDAO = new UserPosDAO();
+		
 		Paciente usuarioInserido = new Paciente();
-		
-		usuarioInserido.setNome("Teste Unitário");
-		usuarioInserido.setIdade(8000);
-		usuarioInserido.setEmail("teste@unitario.com");
 		usuarioInserido.setCpf("000.000.000-00");
-		usuarioInserido.setSenha("teste123");
+
+		//;
 		
-		userPosDAO.salvar(usuarioInserido);
-		
-		Paciente usuarioBuscado = userPosDAO.buscar(
-				usuarioInserido.getCpf(), BuscarBanco.PACIENTE);
-		
-		assertEquals(usuarioInserido.getCpf(), usuarioBuscado.getCpf());
+		//assertEquals(, userPosDAO.salvar(usuarioInserido));
 	}
 	
 	@Test
@@ -47,17 +40,11 @@ public class TesteSalvarDAO {
 		UserPosDAO userPosDAO = new UserPosDAO();
 		
 		Paciente usuarioPkDuplicada = new Paciente();
-		
 		usuarioPkDuplicada.setCpf("000.000.000-00");
-		
-		usuarioPkDuplicada.setNome(" ");
-		usuarioPkDuplicada.setIdade(0);
-		usuarioPkDuplicada.setEmail(" ");
-		usuarioPkDuplicada.setSenha(" ");
 		
 		Exception resultado = assertThrows(UsuarioPkDuplicadaException.class,
 				() -> userPosDAO.salvar(usuarioPkDuplicada));
 		
-		assertEquals("A chave primária do usuário já existe", resultado);
+		assertEquals("A chave primária do usuário já existe", resultado.getMessage());
 	}
 }

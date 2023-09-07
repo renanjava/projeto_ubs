@@ -105,8 +105,13 @@ public class TelaCadastro extends JDialog {
 				}
 				*/
 				
-				UserPosDAO userPosDAO = new UserPosDAO();
-				userPosDAO.salvar(paciente);
+				
+				try {
+					UserPosDAO userPosDAO = new UserPosDAO();
+					userPosDAO.salvar(paciente);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				TelaCadastro.this.dispose();
 				botaoAcionado = true;
 			}
