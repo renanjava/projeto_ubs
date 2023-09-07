@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import dao.jdbc.UserPosDAO;
+import dao.jdbc.PacienteDAO;
 import model.Paciente;
 import ubs.email.CodigoConfirmacao;
 
@@ -97,18 +97,15 @@ public class TelaCadastro extends JDialog {
 				paciente.setEmail(campoEmail.getText());
 				paciente.setIdade(Integer.parseInt(campoIdade.getText()));
 				
-				/*
 				try {
 					CodigoConfirmacao codigoConfirmacao = new CodigoConfirmacao(campoEmail.getText());
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				*/
-				
 				
 				try {
-					UserPosDAO userPosDAO = new UserPosDAO();
-					userPosDAO.salvar(paciente);
+					PacienteDAO userPosDAO = new PacienteDAO();
+					userPosDAO.create(paciente);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

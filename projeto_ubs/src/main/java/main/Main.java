@@ -10,7 +10,7 @@ import com.sun.jna.platform.win32.COM.TypeLibUtil.FindName;
 
 import classes.BloqueioDeConta;
 import conexao.postgres.SingleConnection;
-import dao.jdbc.UserPosDAO;
+import dao.jdbc.PacienteDAO;
 import model.Paciente;
 import ubs.email.CodigoConfirmacao;
 import ubs.enums.BuscarBanco;
@@ -46,10 +46,10 @@ public class Main {
 					Thread.sleep(350); // aguardando o botão logar ser acionado
 				}
 
-				UserPosDAO userPosDAO = new UserPosDAO();
+				PacienteDAO userPosDAO = new PacienteDAO();
 
 				try {
-					usuarioLogado = userPosDAO.buscar(telaLogin.getCampoCpf().getText(),
+					usuarioLogado = userPosDAO.findById(telaLogin.getCampoCpf().getText(),
 							BuscarBanco.PACIENTE);
 					
 					if (usuarioLogado.getCpf().equals(telaLogin.getCampoCpf().getText())

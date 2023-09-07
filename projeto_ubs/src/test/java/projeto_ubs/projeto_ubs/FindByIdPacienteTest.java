@@ -10,37 +10,37 @@ import java.sql.ResultSet;
 import org.junit.jupiter.api.Test;
 
 import conexao.postgres.SingleConnection;
-import dao.jdbc.UserPosDAO;
+import dao.jdbc.PacienteDAO;
 import model.Paciente;
 import ubs.enums.BuscarBanco;
 import ubs.exceptions.UsuarioSemDadosException;
 import ubs.exceptions.UsuarioNaoEncontradoException;
 
-public class TesteBuscarDAO {
+public class FindByIdPacienteTest {
 	
 	@Test
 	public void buscarDeveRetornarPacienteValido() throws Exception {
-		UserPosDAO userPosDAO = new UserPosDAO();
-		Paciente usuarioEncontrado = userPosDAO.buscar("11", BuscarBanco.PACIENTE);
+		PacienteDAO userPosDAO = new PacienteDAO();
+		Paciente usuarioEncontrado = userPosDAO.findById("11", BuscarBanco.PACIENTE);
 		assertEquals(1, usuarioEncontrado.getIdade());
 	}
 	
 	@Test
 	public void buscarDeveRetornarUsuarioNullException() throws UsuarioNaoEncontradoException{
-		UserPosDAO userPosDAO = new UserPosDAO();
+		PacienteDAO userPosDAO = new PacienteDAO();
 		
 		Exception resultado = assertThrows(UsuarioNaoEncontradoException.class, 
-				() -> userPosDAO.buscar("96868685", BuscarBanco.PACIENTE));
+				() -> userPosDAO.findById("96868685", BuscarBanco.PACIENTE));
 		
 		assertEquals("O usuário não foi encontrado", resultado.getMessage());
 	}
 	
 	@Test
 	public void buscarDeveRetornarStringNullException() throws UsuarioSemDadosException {
-		UserPosDAO userPosDAO = new UserPosDAO();
+		PacienteDAO userPosDAO = new PacienteDAO();
 				
 		Exception resultado = assertThrows(UsuarioSemDadosException.class, 
-				()-> userPosDAO.buscar(null, BuscarBanco.PACIENTE));
+				()-> userPosDAO.findById(null, BuscarBanco.PACIENTE));
 		assertEquals("O usuário informado não tem dados",resultado.getMessage());
 	}
 }

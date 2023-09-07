@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-import dao.jdbc.UserPosDAO;
+import dao.jdbc.PacienteDAO;
 import model.Paciente;
 
 public class TelaLogin extends JDialog {

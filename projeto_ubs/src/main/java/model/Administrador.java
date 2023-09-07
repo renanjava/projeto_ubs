@@ -4,10 +4,13 @@ import classes.Pessoa;
 
 public class Administrador extends Pessoa{
 	
-	public Administrador(String cpf, String senha, 
-			String nome){
-		this.cpf = cpf;
-		this.senha = senha;
-		this.nome = nome;
+	private String dataInicialAdm;
+
+	public String getDataInicialAdm() {
+		return dataInicialAdm;
+	}
+
+	public void setDataInicialAdm(String dataInicialAdm) {
+		this.dataInicialAdm = dataInicialAdm;
 	}
 }
