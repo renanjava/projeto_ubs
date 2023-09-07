@@ -14,7 +14,7 @@ import dao.jdbc.UserPosDAO;
 import model.Paciente;
 import ubs.email.CodigoConfirmacao;
 import ubs.enums.BuscarBanco;
-import ubs.exceptions.UsuarioNullException;
+import ubs.exceptions.UsuarioNaoEncontradoException;
 import ubs.swing.TelaCadastro;
 import ubs.swing.TelaInicial;
 import ubs.swing.TelaLogin;
@@ -22,7 +22,7 @@ import ubs.swing.TelaLogin;
 public class Main {
 
 	public static void main(String[] args)
-			throws Exception, UsuarioNullException {
+			throws Exception, UsuarioNaoEncontradoException {
 		
 		Paciente usuarioLogado = null;
 		String botoesCadastro[] = { "Login", "Cadastro" };
@@ -64,7 +64,7 @@ public class Main {
 					}else 
 						erroLogin(bloqueioConta,"Dados Inválidos");
 						
-				} catch (UsuarioNullException e) {
+				} catch (UsuarioNaoEncontradoException e) {
 					erroLogin(bloqueioConta,"Conta não cadastrada");
 				} catch (Exception e) {
 					e.printStackTrace();
