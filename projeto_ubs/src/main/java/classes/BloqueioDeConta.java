@@ -38,9 +38,9 @@ public class BloqueioDeConta {
 	public static void InfoBloqueio() {
 		Date dataHorario = new Date();
 		SimpleDateFormat horarioFormatado = new SimpleDateFormat("HH:mm:ss");
-		String exibirData1 = "Conta bloqueada em: " + horarioFormatado.format(dataHorario);
+		String exibirData1 = "Acesso bloqueado em: " + horarioFormatado.format(dataHorario);
 		dataHorario.setSeconds(dataHorario.getSeconds() + 15);
-		String exibirData2 = "Conta desbloqueará em: " + horarioFormatado.format(dataHorario);
+		String exibirData2 = "Acesso desbloqueará em: " + horarioFormatado.format(dataHorario);
 		JOptionPane.showMessageDialog(null, exibirData1 + "\n" + exibirData2);
 		dataHorario.setSeconds(dataHorario.getSeconds() - 15);
 	}

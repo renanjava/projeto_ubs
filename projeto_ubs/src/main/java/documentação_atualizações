@@ -118,3 +118,23 @@ V1.9 - 07/09/2023
 	Integrando o sistema com o HTML feito pelo João no JavaMail (incompleto)
 	Aderindo à boas práticas: Criado uma interface genérica para 
 	implementar as operações DAO em todas as classes de modelo 
+	
+V2.0 - 08/09/2023, 09/09/2023, 10/09/2023 & 11/09/2023
+	Removido a enum BuscarBanco
+	Criado um enum de categorias de medicamentos
+	Criado o insert de medicamento no banco
+	Criado um teste unitário para testar insert/update de medicamento
+	Criado um teste unitário para testar a inserção caso o objeto esteja null
+	Novas pendências
+	Deixando as Exceptions genéricas para encaixar em todas as classes
+	Concluído o teste unitário no createPaciente
+	Comentado dentro das classes os comportamentos que elas farão em breve
+	Criado a operação no banco de dados para "buscar por categoria+nome" e "update"
+	Criado um comportamento onde caso já existir um registro com o mesmo
+		nome e categoria, é somado a quantidade de medicamento total
+	Criado tipos de usúario, agora não é apenas Paciente
+	Ao indicar o tipo de usuário, ao tentar logar-se, o programa busca no banco de dados
+		na tabela do respectivo usuário escolhido e não em outros
+	Deixando o set e o get das chaves primárias das classes de modelo mais genéricas
+	Implementado o findById do MedicoDAO
+	Agora a tela inicial é única para cada tipo de usuário

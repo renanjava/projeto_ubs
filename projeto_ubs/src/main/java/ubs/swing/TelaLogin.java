@@ -22,33 +22,36 @@ import model.Paciente;
 
 public class TelaLogin extends JDialog {
 	private JPanel telaLogin = new JPanel(new GridBagLayout());
-	private JLabel tituloLogin = new JLabel("CPF");
+	private JLabel tituloLogin = null;
 	private JLabel tituloSenha = new JLabel("Senha");
-	private TextField campoCpf = new TextField();
+	private TextField campoLogin = new TextField();
 	private JPasswordField campoSenha = new JPasswordField();
-	private JButton botaoCadastrar = new JButton("Logar");
+	private JButton botaoLogar = new JButton("Logar");
 	private boolean botaoAcionado = false;
 	private GridBagConstraints coordenadas = new GridBagConstraints();
+	private String nomeTipoUsuario;
 
-	public TelaLogin() {
+	public TelaLogin(int tipoUsuario) {
+		definirTipoUsuario(tipoUsuario);
 		setTitle("UBS - Unidade Básica de Saúde");
 		setSize(190, 140);
 		setLocationRelativeTo(null);
 		setResizable(false);
-
+		
 		
 		coordenadas.gridx = 1;
-		telaLogin.add(new JLabel("Acesso de usuário"),coordenadas);
+		telaLogin.add(new JLabel("Acesso de "+nomeTipoUsuario),coordenadas);
 		tituloLogin.setBounds(20, 50, 120, 20);
 		tituloSenha.setBounds(20, 100, 120, 20);
-		campoCpf.setPreferredSize(new Dimension(120, 22));
+		campoLogin.setPreferredSize(new Dimension(120, 22));
 		campoSenha.setPreferredSize(new Dimension(120, 22));
 
 		coordenadas.gridx = 0;
 		coordenadas.gridy = 2;
+		
 		telaLogin.add(tituloLogin,coordenadas);
 		coordenadas.gridx++;
-		telaLogin.add(campoCpf,coordenadas);
+		telaLogin.add(campoLogin,coordenadas);
 		coordenadas.gridx = 0;
 		coordenadas.gridy += 4;
 		telaLogin.add(tituloSenha,coordenadas);
@@ -56,12 +59,12 @@ public class TelaLogin extends JDialog {
 		telaLogin.add(campoSenha,coordenadas);
 		coordenadas.gridx = 1;
 		coordenadas.gridy += 4;
-		telaLogin.add(botaoCadastrar,coordenadas);
+		telaLogin.add(botaoLogar,coordenadas);
 
 		add(telaLogin, BorderLayout.WEST);
 		setVisible(true);
 
-		botaoCadastrar.addActionListener(new ActionListener() {
+		botaoLogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaLogin.this.dispose();
 				botaoAcionado = true;
@@ -74,8 +77,26 @@ public class TelaLogin extends JDialog {
 		return this.coordenadas;
 	}
 	
-	public TextField getCampoCpf() {
-		return campoCpf;
+	public void definirTipoUsuario(int tipoUsuario) {
+		
+		switch(tipoUsuario) {
+			case 1: 
+				tituloLogin = new JLabel("CPF"); 
+				nomeTipoUsuario = "Paciente";
+				break;
+			case 2:	
+				tituloLogin = new JLabel("CRM"); 
+				nomeTipoUsuario = "Médico";
+				break;
+			case 3:	
+				tituloLogin = new JLabel("ID"); 
+				nomeTipoUsuario = "Admin";
+				break;
+		}
+	}
+	
+	public TextField getCampoLogin() {
+		return campoLogin;
 	}
 	
 	public JPasswordField getCampoSenha() {

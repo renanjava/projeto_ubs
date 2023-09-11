@@ -1,17 +1,16 @@
 package classes;
 
+import java.util.List;
+
+import javax.swing.JButton;
+
 public abstract class Pessoa {
-	protected String cpf;
 	protected String senha;
 	protected String nome;
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+	
+	public abstract List<JButton> interagirBotoes();
+	public abstract void setPk(String pk);
+	public abstract String getPk();
 
 	public String getSenha() {
 		return senha;

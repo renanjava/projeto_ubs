@@ -7,44 +7,49 @@ import org.junit.jupiter.api.Test;
 
 import dao.jdbc.PacienteDAO;
 import model.Paciente;
-import ubs.enums.BuscarBanco;
-import ubs.exceptions.UsuarioNaoEncontradoException;
-import ubs.exceptions.UsuarioPkDuplicadaException;
-import ubs.exceptions.UsuarioSemDadosException;
+import ubs.exceptions.ObjetoNaoEncontradoException;
+import ubs.exceptions.PkDuplicadaException;
+import ubs.exceptions.ObjetoSemDadosException;
 
 public class CreatePacienteTest {
 	
 	@Test
 	public void salvarDeveInserirNoBanco() throws Exception{
-		PacienteDAO userPosDAO = new PacienteDAO();
+		PacienteDAO pacienteDAO = new PacienteDAO();
 		
-		Paciente usuarioInserido = new Paciente();
-		usuarioInserido.setCpf("000.000.000-00");
-
-		//;
+		Paciente pacienteInserir = new Paciente();
+		pacienteInserir.setPk("900.090.009-90");
+		pacienteInserir.setEmail("teste@unitario");
+		pacienteInserir.setIdade(99);
+		pacienteInserir.setNome("TESTES UNITÁRIOS");
+		pacienteInserir.setSenha("teste123");
 		
-		//assertEquals(, userPosDAO.salvar(usuarioInserido));
+		pacienteDAO.create(pacienteInserir);
+		assertEquals(pacienteInserir.getNome(),pacienteInserir.getNome());
+		
+		Paciente pacienteBuscado = pacienteDAO.findById(pacienteInserir.getPk());
+		assertEquals(pacienteBuscado.getNome(), pacienteInserir.getNome());
 	}
 	
 	@Test
-	public void salvarDeveBloquearUsuarioNulo() throws UsuarioSemDadosException{
-		PacienteDAO userPosDAO = new PacienteDAO();
+	public void salvarDeveBloquearUsuarioNulo() throws ObjetoSemDadosException{
+		PacienteDAO pacienteDAO = new PacienteDAO();
 		
-		Exception resultado = assertThrows(UsuarioSemDadosException.class,
-				() -> userPosDAO.create(null));
-		assertEquals("O usuário informado não tem dados",resultado.getMessage());
+		Exception resultado = assertThrows(ObjetoSemDadosException.class,
+				() -> pacienteDAO.create(null));
+		assertEquals("O objeto informado não tem dados",resultado.getMessage());
 	}
 	
 	@Test
 	public void salvarDeveBloquearPkDuplicada() throws Exception{
-		PacienteDAO userPosDAO = new PacienteDAO();
+		PacienteDAO pacienteDAO = new PacienteDAO();
 		
 		Paciente usuarioPkDuplicada = new Paciente();
-		usuarioPkDuplicada.setCpf("000.000.000-00");
+		usuarioPkDuplicada.setPk("900.090.009-90");
 		
-		Exception resultado = assertThrows(UsuarioPkDuplicadaException.class,
-				() -> userPosDAO.create(usuarioPkDuplicada));
+		Exception resultado = assertThrows(PkDuplicadaException.class,
+				() -> pacienteDAO.create(usuarioPkDuplicada));
 		
-		assertEquals("A chave primária do usuário já existe", resultado.getMessage());
+		assertEquals("A chave primária já existe", resultado.getMessage());
 	}
 }

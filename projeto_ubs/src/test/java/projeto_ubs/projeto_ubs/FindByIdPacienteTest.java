@@ -12,35 +12,34 @@ import org.junit.jupiter.api.Test;
 import conexao.postgres.SingleConnection;
 import dao.jdbc.PacienteDAO;
 import model.Paciente;
-import ubs.enums.BuscarBanco;
-import ubs.exceptions.UsuarioSemDadosException;
-import ubs.exceptions.UsuarioNaoEncontradoException;
+import ubs.exceptions.ObjetoSemDadosException;
+import ubs.exceptions.ObjetoNaoEncontradoException;
 
 public class FindByIdPacienteTest {
 	
 	@Test
 	public void buscarDeveRetornarPacienteValido() throws Exception {
 		PacienteDAO userPosDAO = new PacienteDAO();
-		Paciente usuarioEncontrado = userPosDAO.findById("11", BuscarBanco.PACIENTE);
+		Paciente usuarioEncontrado = userPosDAO.findById("11");
 		assertEquals(1, usuarioEncontrado.getIdade());
 	}
 	
 	@Test
-	public void buscarDeveRetornarUsuarioNullException() throws UsuarioNaoEncontradoException{
+	public void buscarDeveRetornarUsuarioNullException() throws ObjetoNaoEncontradoException{
 		PacienteDAO userPosDAO = new PacienteDAO();
 		
-		Exception resultado = assertThrows(UsuarioNaoEncontradoException.class, 
-				() -> userPosDAO.findById("96868685", BuscarBanco.PACIENTE));
+		Exception resultado = assertThrows(ObjetoNaoEncontradoException.class, 
+				() -> userPosDAO.findById("96868685"));
 		
-		assertEquals("O usuário não foi encontrado", resultado.getMessage());
+		assertEquals("Nenhum objeto foi encontrado", resultado.getMessage());
 	}
 	
 	@Test
-	public void buscarDeveRetornarStringNullException() throws UsuarioSemDadosException {
+	public void buscarDeveRetornarStringNullException() throws ObjetoSemDadosException {
 		PacienteDAO userPosDAO = new PacienteDAO();
 				
-		Exception resultado = assertThrows(UsuarioSemDadosException.class, 
-				()-> userPosDAO.findById(null, BuscarBanco.PACIENTE));
-		assertEquals("O usuário informado não tem dados",resultado.getMessage());
+		Exception resultado = assertThrows(ObjetoSemDadosException.class, 
+				()-> userPosDAO.findById(null));
+		assertEquals("O objeto informado não tem dados",resultado.getMessage());
 	}
 }

@@ -7,82 +7,91 @@ import java.awt.GridBagLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import classes.Pessoa;
 import model.Paciente;
 
-public class TelaInicial extends JDialog{
+public class TelaInicial extends JDialog {
 	private JPanel telaInicial = new JPanel(new GridBagLayout());
-	private JButton editarDados = new JButton("Editar Dados");
-	private JButton dadosUsuario = new JButton("Meus Dados");
 	GridBagConstraints coordenadas = new GridBagConstraints();
-	private Paciente usuario;
+	private Pessoa usuario;
 	private JLabel apresentacao;
-	
-	public TelaInicial(final Paciente usuario){
+
+	public TelaInicial(Pessoa usuario) {
+		
 		setTitle("UBS - Unidade Básica de Saúde");
-		setSize(new Dimension(110,180));
+		setSize(new Dimension(110, 180));
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
+
 		this.usuario = usuario;
-		apresentacao = new JLabel("Bem-vindo(a) "+usuario.getNome());
+		telaInicial.add(new JLabel("Bem-vindo(a) " + usuario.getNome()));
 		
 		coordenadas.gridx = 0;
 		coordenadas.gridy = 0;
 		
-		telaInicial.add(apresentacao,somarY());
-		telaInicial.add(dadosUsuario,somarY());
-		
+		List<JButton> listaDeBotoesUsuario = usuario.interagirBotoes();
+		for (JButton botao : listaDeBotoesUsuario) {
+			comportamentosBotoes(botao);
+			telaInicial.add(botao, somarY());
+		}
+
 		add(telaInicial, BorderLayout.WEST);
 		setVisible(true);
-	
-	dadosUsuario.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			setVisible(false);
-			telaInicial.add(new JLabel("Nome: "+usuario.getNome()),somarY());
-			telaInicial.add(new JLabel("Idade: "+usuario.getIdade()),somarY());
-			telaInicial.add(new JLabel("Email: "+usuario.getEmail()),somarY());
-			telaInicial.add(new JLabel("CPF: "+usuario.getCpf()),somarY());
-			telaInicial.add(editarDados,somarY());
-			setVisible(true);
-		}
-	});
-	
-	editarDados.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			
-			setVisible(false);
-			//remove();
-			
-			JLabel emailAtualTitulo = new JLabel("Email Atual");
-			TextField emailAtualCampo = new TextField();
-			emailAtualTitulo.setPreferredSize(new Dimension(230, 25));
-			emailAtualCampo.setPreferredSize(new Dimension(220, 25));
-			emailAtualCampo.setText(usuario.getEmail());
-			
-			setTitle("UBS - Unidade Básica de Saúde");
-			setSize(new Dimension(255, 340));
-			setLocationRelativeTo(null);
-			setResizable(false);
-			
-			coordenadas.gridx = 0;
-			coordenadas.gridy = 0;
-			
-			telaInicial.add(emailAtualTitulo,somarY());
-			telaInicial.add(emailAtualCampo,somarY());
-			
-			add(telaInicial, BorderLayout.WEST);
-			setVisible(true);
-		}
-	});
 	}
+
 	public GridBagConstraints somarY() {
 		coordenadas.gridy += 1;
 		return coordenadas;
+	}
+
+	public void comportamentosBotoes(JButton botao) {
+		switch (botao.getText()) {
+		case "Meus Dados":
+			botao.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					setVisible(false);
+					telaInicial.add(new JLabel("Nome: " + usuario.getNome()), somarY());
+					telaInicial.add(new JLabel("PK: " + usuario.getPk()), somarY());
+					setVisible(true);
+				}
+			});
+			break;
+		case "Editar Dados":
+			botao.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+					setVisible(false);
+					// remove();
+
+					JLabel emailAtualTitulo = new JLabel("Email Atual");
+					TextField emailAtualCampo = new TextField();
+					emailAtualTitulo.setPreferredSize(new Dimension(230, 25));
+					emailAtualCampo.setPreferredSize(new Dimension(220, 25));
+					// emailAtualCampo.setText(usuario.getEmail());
+
+					setTitle("UBS - Unidade Básica de Saúde");
+					setSize(new Dimension(255, 340));
+					setLocationRelativeTo(null);
+					setResizable(false);
+
+					coordenadas.gridx = 0;
+					coordenadas.gridy = 0;
+
+					telaInicial.add(emailAtualTitulo, somarY());
+					telaInicial.add(emailAtualCampo, somarY());
+
+					add(telaInicial, BorderLayout.WEST);
+					setVisible(true);
+				}
+			});
+		}
 	}
 }

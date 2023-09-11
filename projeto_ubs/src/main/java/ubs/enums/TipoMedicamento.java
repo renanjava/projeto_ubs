@@ -1,0 +1,26 @@
+package ubs.enums;
+
+public enum TipoMedicamento {
+	
+	ANALGESICO("ANALGESICO"),
+	ANTIINFLAMATORIO("ANTIINFLAMATORIO"),
+	ANTIBIOTICO("ANTIBIOTICO"),
+	ANTIVIRAL("ANTIVIRAL"),
+	ANTIFUNGICO("ANTIFUNGICO"),
+	ANTIDEPRESSIVO("ANTIDEPRESSIVO"),
+	ANSIOLITICO("ANSIOLITICO"),
+	ANTIPSICOTICO("ANTIPSICOTICO"),
+	ANTICONVULSIVANTE("ANTICONVULSIVANTE"),
+	ANTICOAGULANTE("ANTICOAGULANTE"),
+	ANTIHISTAMINICO("ANTIHISTAMINICO");
+	
+	private String nome;
+	
+	TipoMedicamento(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getNomeCategoria() {
+		return nome;
+	}
+}

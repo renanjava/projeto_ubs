@@ -92,7 +92,7 @@ public class TelaCadastro extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 
 				paciente.setNome(campoNome.getText());
-				paciente.setCpf(campoCpf.getText());
+				paciente.setPk(campoCpf.getText());
 				paciente.setSenha(campoSenha.getText());
 				paciente.setEmail(campoEmail.getText());
 				paciente.setIdade(Integer.parseInt(campoIdade.getText()));
