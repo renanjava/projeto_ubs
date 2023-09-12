@@ -2,6 +2,7 @@ package ubs.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.TextField;
@@ -12,45 +13,38 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import classes.Pessoa;
 import model.Paciente;
+import sun.tools.jconsole.inspector.Utils.EditFocusAdapter;
 
 public class TelaInicial extends JDialog {
-	private JPanel telaInicial = new JPanel(new GridBagLayout());
-	GridBagConstraints coordenadas = new GridBagConstraints();
+	private JFrame frame = new JFrame();
+	private JPanel telaInicial = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	private Pessoa usuario;
-	private JLabel apresentacao;
 
 	public TelaInicial(Pessoa usuario) {
-		
-		setTitle("UBS - Unidade Básica de Saúde");
-		setSize(new Dimension(110, 180));
-		setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+		frame.setTitle("UBS - Unidade Básica de Saúde");
+		frame.setLocationRelativeTo(null);
 		setResizable(false);
 
 		this.usuario = usuario;
-		telaInicial.add(new JLabel("Bem-vindo(a) " + usuario.getNome()));
-		
-		coordenadas.gridx = 0;
-		coordenadas.gridy = 0;
 		
 		List<JButton> listaDeBotoesUsuario = usuario.interagirBotoes();
 		for (JButton botao : listaDeBotoesUsuario) {
 			comportamentosBotoes(botao);
-			telaInicial.add(botao, somarY());
+			telaInicial.add(botao);
 		}
 
-		add(telaInicial, BorderLayout.WEST);
-		setVisible(true);
+		frame.add(telaInicial);
+		frame.setVisible(true);
 	}
 
-	public GridBagConstraints somarY() {
-		coordenadas.gridy += 1;
-		return coordenadas;
-	}
 
 	public void comportamentosBotoes(JButton botao) {
 		switch (botao.getText()) {
@@ -58,8 +52,9 @@ public class TelaInicial extends JDialog {
 			botao.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
-					telaInicial.add(new JLabel("Nome: " + usuario.getNome()), somarY());
-					telaInicial.add(new JLabel("PK: " + usuario.getPk()), somarY());
+					telaInicial.removeAll();
+					telaInicial.add(new JLabel("Nome: " + usuario.getNome()));
+					telaInicial.add(new JLabel("PK: " + usuario.getPk()));
 					setVisible(true);
 				}
 			});
@@ -69,24 +64,21 @@ public class TelaInicial extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 
 					setVisible(false);
-					// remove();
+					telaInicial.removeAll();
 
 					JLabel emailAtualTitulo = new JLabel("Email Atual");
 					TextField emailAtualCampo = new TextField();
 					emailAtualTitulo.setPreferredSize(new Dimension(230, 25));
 					emailAtualCampo.setPreferredSize(new Dimension(220, 25));
-					// emailAtualCampo.setText(usuario.getEmail());
+					emailAtualCampo.setText(((Paciente)usuario).getEmail());
 
 					setTitle("UBS - Unidade Básica de Saúde");
 					setSize(new Dimension(255, 340));
 					setLocationRelativeTo(null);
 					setResizable(false);
 
-					coordenadas.gridx = 0;
-					coordenadas.gridy = 0;
-
-					telaInicial.add(emailAtualTitulo, somarY());
-					telaInicial.add(emailAtualCampo, somarY());
+					telaInicial.add(emailAtualTitulo);
+					telaInicial.add(emailAtualCampo);
 
 					add(telaInicial, BorderLayout.WEST);
 					setVisible(true);

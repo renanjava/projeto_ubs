@@ -13,13 +13,15 @@ public class Paciente extends Pessoa {
 	private String email;
 	
 	public List<JButton> interagirBotoes() {
-		List<JButton> listaBotoes = new ArrayList<JButton>();
-		
 		JButton meusDados = new JButton("Meus Dados");
 		JButton editarDados = new JButton("Editar Dados");
-		listaBotoes.add(meusDados);
-		listaBotoes.add(editarDados);
+		JButton solicitarConsulta = new JButton("Solicitar Consulta");
 		
+		List<JButton> listaBotoes = new ArrayList<JButton>();
+		listaBotoes.addAll(List.of(
+				meusDados, editarDados,
+				solicitarConsulta
+				));
 		return listaBotoes;
 	}
 	public void setPk(String cpf) {

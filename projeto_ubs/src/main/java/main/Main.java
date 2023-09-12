@@ -1,8 +1,10 @@
 package main;
 
 
-import javax.swing.JOptionPane;
+import java.awt.TextField;
 
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 import classes.BloqueioDeConta;
 import classes.Pessoa;
@@ -13,6 +15,7 @@ import dao.jdbc.PacienteDAO;
 import model.Administrador;
 import model.Medico;
 import model.Paciente;
+import ubs.exceptions.LoginCamposNulosException;
 import ubs.exceptions.ObjetoNaoEncontradoException;
 import ubs.exceptions.TipoUsuarioInvalidoException;
 import ubs.interfaces.OperacoesDAO;
@@ -47,7 +50,6 @@ public class Main {
 		
 		Pessoa usuarioLogadoComSucesso = processoLogin(tipoUsuario);
 		//a partir daqui, o usuário logou em uma conta
-		System.out.println(usuarioLogadoComSucesso.getNome());
 		TelaInicial telaInicial = new TelaInicial(usuarioLogadoComSucesso);
 
 	}
@@ -79,6 +81,20 @@ public class Main {
 
 			while (!telaLogin.getBotaoAcionado()) {
 				Thread.sleep(350);
+				if(!telaLogin.isActive()
+					&& telaLogin.getCampoLogin().getText().equals(new TextField().getText())
+					&& telaLogin.getCampoSenha().getText().equals(new JPasswordField().getText()))
+					{
+					//exception e interrupção na thread
+					//quando o usuário não informa login e senha
+					try {
+						bloqueioConta.getTTempoLimite().interrupt();
+						throw new LoginCamposNulosException();
+					}catch(LoginCamposNulosException e) {
+						e.printStackTrace();
+						System.exit(0);
+					}
+				}	
 			}
 
 			try {

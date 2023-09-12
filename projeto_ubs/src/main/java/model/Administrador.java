@@ -13,11 +13,16 @@ public class Administrador extends Pessoa{
 	private String dataInicialAdm;
 	
 	public List<JButton> interagirBotoes() {
-		//cadastrar médico
-		//excluir medico
-		//excluir paciente
-		//atualizar os medicamentos
+		JButton cadastrarMedico = new JButton("Cadastrar Médico");
+		JButton excluirMedico = new JButton("Excluir Médico");
+		JButton excluirPaciente = new JButton("Excluir Paciente");
+		JButton atualizarMedicamentos = new JButton("Atualizar Medicamentos");
+		
 		List<JButton> listaBotoes = new ArrayList<JButton>();
+		listaBotoes.addAll(List.of(
+				cadastrarMedico, excluirMedico,
+				excluirPaciente,atualizarMedicamentos
+				));
 		return listaBotoes;
 	}
 	

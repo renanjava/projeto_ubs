@@ -12,11 +12,16 @@ public class Medico extends Pessoa {
 	private AreaMedico especializacao;
 	private String crm;
 	
-	//realizar exames
-	//criar receitas (condição para sua área)
-	
 	public List<JButton> interagirBotoes() {
+		JButton visualizarConsultas = new JButton("Visualizar Consultas");
+		JButton criarReceita = new JButton("Criar Receita");
+		JButton iniciarExame = new JButton("Iniciar Exame");
+		
 		List<JButton> listaBotoes = new ArrayList<JButton>();
+		listaBotoes.addAll(List.of(
+				criarReceita, iniciarExame,
+				visualizarConsultas
+				));
 		return listaBotoes;
 	}
 	
