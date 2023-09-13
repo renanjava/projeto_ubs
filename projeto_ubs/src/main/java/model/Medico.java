@@ -14,13 +14,11 @@ public class Medico extends Pessoa {
 	
 	public List<JButton> interagirBotoes() {
 		JButton visualizarConsultas = new JButton("Visualizar Consultas");
-		JButton criarReceita = new JButton("Criar Receita");
 		JButton iniciarExame = new JButton("Iniciar Exame");
 		
 		List<JButton> listaBotoes = new ArrayList<JButton>();
 		listaBotoes.addAll(List.of(
-				criarReceita, iniciarExame,
-				visualizarConsultas
+			iniciarExame,visualizarConsultas
 				));
 		return listaBotoes;
 	}
@@ -33,8 +31,8 @@ public class Medico extends Pessoa {
 		return crm;
 	}
 
-	public AreaMedico getEspecializacao() {
-		return especializacao;
+	public String getNomeEsp() {
+		return especializacao.getAreaMedico();
 	}
 
 	public void setEspecializacao(AreaMedico especializacao) {

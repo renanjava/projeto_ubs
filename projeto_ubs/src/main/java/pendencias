@@ -1,19 +1,15 @@
 thread no envio de email
-fila na coleta dos dados no textfield
 fila nas consultas
 validar todos os campos do textfield antes de enviar email
 diminuir a repetição de código no comportamento do botão
-customizar o swing jpanel
 html no código de confirmacao (incompleto)
-editar dados cliente
-terminar a tela do paciente -> dados do paciente -> edição de dados
 na receita terá a categoria do remédio e a quantidade necessária
 caso o nome do medicamento no insert já constar no banco, então é feito um 
 	incremento na quantidade
-tabela Exame terá o id do paciente, medico, data e diagnostico
-tabela Receita terá o id do exame, categoria do remedio, nome e quantidade
+tabela Consulta terá o id do paciente, idade, descricao e area do medico
+tabela Exame terá o id do paciente, medico, data e medicamento
+//tabela Receita terá o id do exame, categoria do remedio, nome e quantidade
 JPasswordField no campo de senha de Cadastro
-refazer a modelagem do banco de dados
 transferir o código de confirmação para o método create do DAO paciente, Exception p/email
 solucionar o objeto não encontrado no findbyid
 restrições de medicamentos gerados na receita, exemplo: 
@@ -22,6 +18,13 @@ para implementar a pendência acima, só combinar os IDs dos médicos com os
 	medicamentos permitidos: enum psiquiatra id 1, enum antidepressivo id 1.
 função dentro do banco para verificar se é o mesmo medicamento só que escrito errado/diferente
 tirar o instrucoesBloqueio
+gerar a receita em arquivo
+limite de caracteres no descrição do problema na consulta
+função que conta a quantidade de pacientes cadastrados
+password em hash no banco
+validar a entrada do campo idade ser apenas numeros no cadastro
+email dizendo que a consulta foi cadastrada
+bloqueio de solicitar consulta, apenas 2 vezes ao dia
 
 o paciente clica em agendar consulta e coloca uma descrição sobre seu problema. 
 Dai na tela dos médicos vai ter uma aba para exibir todas as consultas pendentes e 

@@ -5,10 +5,9 @@ import ubs.interfaces.OperacoesDAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import classes.PessoaDAO;
 import model.Administrador;
 
-public class AdministradorDAO extends PessoaDAO implements OperacoesDAO<Administrador> {
+public class AdministradorDAO extends ConexaoDAO implements OperacoesDAO<Administrador> {
 	
 	public AdministradorDAO(){
 		super();

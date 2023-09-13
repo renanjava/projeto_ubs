@@ -15,11 +15,10 @@ import conexao.postgres.SingleConnection;
 import model.Medicamento;
 import model.Paciente;
 
-public class MedicamentoDAO implements OperacoesDAO<Medicamento> {
-	private Connection conexao;
+public class MedicamentoDAO extends ConexaoDAO implements OperacoesDAO<Medicamento> {
 
 	public MedicamentoDAO() {
-		conexao = SingleConnection.getConnection();
+		super();
 	}
 
 	public void create(Medicamento medicamentoSalvar) throws Exception {
@@ -33,7 +32,8 @@ public class MedicamentoDAO implements OperacoesDAO<Medicamento> {
 				update(medicamentoSalvar);
 
 		} catch (ObjetoNaoEncontradoException e0) {
-			String sql = "INSERT INTO MEDICAMENTO(NOME, QUANTIDADE, CATEGORIA) " + "VALUES(?, ?, ?)";
+			String sql = "INSERT INTO MEDICAMENTO(NOME, QUANTIDADE, CATEGORIA) "
+									+ "VALUES(?, ?, ?)";
 
 			try {
 				PreparedStatement insert = conexao.prepareStatement(sql);

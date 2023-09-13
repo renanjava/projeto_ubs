@@ -1,13 +1,13 @@
-package classes;
+package dao.jdbc;
 
 import java.sql.Connection;
 
 import conexao.postgres.SingleConnection;
 
-public abstract class PessoaDAO {
+public abstract class ConexaoDAO {
 	protected Connection conexao;
 
-	public PessoaDAO() {
+	public ConexaoDAO() {
 		conexao = SingleConnection.getConnection();
 	}
 }

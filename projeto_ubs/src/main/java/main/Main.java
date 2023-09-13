@@ -8,10 +8,10 @@ import javax.swing.JPasswordField;
 
 import classes.BloqueioDeConta;
 import classes.Pessoa;
-import classes.PessoaDAO;
 import dao.jdbc.AdministradorDAO;
 import dao.jdbc.MedicoDAO;
 import dao.jdbc.PacienteDAO;
+import dao.jdbc.ConexaoDAO;
 import model.Administrador;
 import model.Medico;
 import model.Paciente;
@@ -57,7 +57,7 @@ public class Main {
 	public static Pessoa processoLogin(int tipoUsuario) throws Exception{	
 		
 		Pessoa usuarioLogando = null;
-		PessoaDAO operacaoDAO = null;
+		ConexaoDAO operacaoDAO = null;
 		
 		switch(tipoUsuario) { //definindo o tipo de usuário
 			case 1: usuarioLogando = Paciente.class.newInstance(); break;

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import classes.PessoaDAO;
 import conexao.postgres.SingleConnection;
 import model.Paciente;
 import ubs.exceptions.ObjetoSemDadosException;
@@ -15,7 +14,7 @@ import ubs.interfaces.OperacoesDAO;
 import ubs.exceptions.ObjetoNaoEncontradoException;
 import ubs.exceptions.PkDuplicadaException;
 
-public class PacienteDAO extends PessoaDAO implements OperacoesDAO<Paciente>{
+public class PacienteDAO extends ConexaoDAO implements OperacoesDAO<Paciente>{
 	
 	public PacienteDAO(){
 		super();
@@ -80,9 +79,10 @@ public class PacienteDAO extends PessoaDAO implements OperacoesDAO<Paciente>{
 			throw new ObjetoSemDadosException();
 
 		String sql = "SELECT * FROM PACIENTE "
-					+"WHERE CPF = '"+cpf+"'";
+					+"WHERE CPF = ?";
 
 		PreparedStatement statement = conexao.prepareStatement(sql);
+		statement.setString(1, cpf);
 		ResultSet resultado = statement.executeQuery();
 
 		Paciente usuarioEncontrado = new Paciente();
@@ -104,6 +104,7 @@ public class PacienteDAO extends PessoaDAO implements OperacoesDAO<Paciente>{
 		try {
 			PreparedStatement update = conexao.prepareStatement(sql);
 			update.setString(1, pacienteModificado.getEmail());
+			update.setString(2, pacienteModificado.getPk());
 			update.execute();
 			conexao.commit();
 		} catch (SQLException e) {
@@ -118,9 +119,10 @@ public class PacienteDAO extends PessoaDAO implements OperacoesDAO<Paciente>{
 
 	public void delete(String cpf) {
 		String sql = "DELETE FROM PACIENTE " 
-					+"WHERE CPF = " + cpf;
+					+"WHERE CPF = ?";
 		try {
 			PreparedStatement delete = conexao.prepareStatement(sql);
+			delete.setString(1, cpf);
 			delete.execute();
 			conexao.commit();
 		} catch (Exception e) {

@@ -143,3 +143,18 @@ V2.1 - 12/09/2023
 	Aplicado o JFrame na tela inicial
 	Arrumado alguns bugs da tela inicial
 	Gerando Exception caso o usuário feche a janela do login sem informar o login e senha
+	
+V3.0 - 12/09/2023 & 13/09/2023
+	Iniciado a solicitação de exame(consulta) na tela inicial do paciente
+	Alterado as enums TipoMedicamento e AreaMedico para conectá-las
+	Criado a tabela no BD para restringir os tipos de medicamentos que os médicos receitam
+	Protegendo os DAO's SQL de SQLInjection
+	Criado a tela para o paciente fazer a sua consulta
+	Criado a tela para o médico visualizar todas as consultas
+	Criado uma function no banco de dados que retorna a quantidade de pacientes
+		para cada especialização
+	Criado uma operação de Atendimento onde o Visualizar Consultas para os medicos
+		retorne só as consultas de sua área
+	Criado um método que retorna para o paciente o id da consulta que foi cadastrada
+	Criado um método que verifica se o mesmo paciente já fez a mesma descrição de problema
+		para o mesmo profissional
